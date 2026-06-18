@@ -1,0 +1,14 @@
+{
+  "capital": 1000.0,
+  "positions": [],
+  "trades": [],
+  "price_history": {
+    "XAUUSD": [],
+    "BTC": [],
+    "NVDA": [],
+    "MSFT": [],
+    "AAPL": []
+  },
+  "signals": {},
+  "last_update": null
+}
