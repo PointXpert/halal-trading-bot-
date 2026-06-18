@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HalalBot - Paper Trading</title>
+<title>HalalBot - Paper Trading Reel</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
@@ -19,40 +18,25 @@
 <body>
 <div id="root"></div>
 <script type="text/babel">
-const { useState, useEffect, useCallback } = React;
+const { useState, useEffect } = React;
 
 const INITIAL_CAPITAL = 1000;
 
-const HALAL_INSTRUMENTS = [
-{ id: “XAUUSD”, name: “Or / Gold”, type: “Matière première”, emoji: “🥇” },
-{ id: “BTC”, name: “Bitcoin”, type: “Crypto Halal”, emoji: “₿” },
-{ id: “NVDA”, name: “Nvidia”, type: “Action Tech”, emoji: “💻” },
-{ id: “MSFT”, name: “Microsoft”, type: “Action Tech”, emoji: “🖥️” },
-{ id: “AAPL”, name: “Apple”, type: “Action Tech”, emoji: “📱” },
-];
-
-const BASE_PRICES = { XAUUSD: 4504, BTC: 77365, NVDA: 185, MSFT: 425, AAPL: 198 };
-const VOLATILITIES = { XAUUSD: 8, BTC: 250, NVDA: 1.2, MSFT: 0.8, AAPL: 0.7 };
-
-const generatePrice = (base, vol) => +(base + (Math.random() - 0.48) * vol).toFixed(2);
-
-const analyzeSignal = (price, history) => {
-if (history.length < 5) return “ATTENDRE”;
-const avg = history.slice(-5).reduce((s, h) => s + h.price, 0) / 5;
-const rsi = Math.random() * 40 + 30;
-if (price > avg * 1.002 && rsi < 70) return “ACHETER”;
-if (price < avg * 0.998 && rsi > 30) return “VENDRE”;
-return “ATTENDRE”;
+const INSTRUMENT_META = {
+  XAUUSD: { emoji: "🥇", type: "Matiere premiere" },
+  BTC: { emoji: "₿", type: "Crypto Halal" },
+  NVDA: { emoji: "💻", type: "Action Tech" },
+  MSFT: { emoji: "🖥️", type: "Action Tech" },
+  AAPL: { emoji: "📱", type: "Action Tech" },
 };
 
 const Badge = ({ signal }) => {
-const map = { ACHETER: [”#16a34a”, “▲ ACHETER”], VENDRE: [”#dc2626”, “▼ VENDRE”], ATTENDRE: [”#d97706”, “◆ ATTENDRE”] };
-const [bg, label] = map[signal];
-return <span style={{ background: bg, color: “white”, fontSize: 10, fontWeight: 700, padding: “3px 8px”, borderRadius: 20, whiteSpace: “nowrap” }}>{label}</span>;
+  const map = { ACHETER: ["#16a34a", "▲ ACHETER"], VENDRE: ["#dc2626", "▼ VENDRE"], ATTENDRE: ["#d97706", "◆ ATTENDRE"] };
+  const [bg, label] = map[signal] || map.ATTENDRE;
+  return <span style={{ background: bg, color: "white", fontSize: 10, fontWeight: 700, padding: "3px 8px", borderRadius: 20, whiteSpace: "nowrap" }}>{label}</span>;
 };
 
 const Card = ({ label, value, color }) => (
-
   <div style={{ background: "#0f172a", borderRadius: 10, padding: "10px 8px", textAlign: "center", border: "1px solid #1e3a5f" }}>
     <div style={{ fontSize: 9, color: "#475569", marginBottom: 3, textTransform: "uppercase", letterSpacing: 0.5 }}>{label}</div>
     <div style={{ fontSize: 14, fontWeight: 800, color }}>{value}</div>
@@ -60,248 +44,192 @@ const Card = ({ label, value, color }) => (
 );
 
 function App() {
-const [capital, setCapital] = useState(INITIAL_CAPITAL);
-const [prices, setPrices] = useState({ …BASE_PRICES });
-const [history, setHistory] = useState(Object.fromEntries(Object.keys(BASE_PRICES).map(k => [k, []])));
-const [positions, setPositions] = useState([]);
-const [trades, setTrades] = useState([]);
-const [signals, setSignals] = useState({});
-const [running, setRunning] = useState(false);
-const [tick, setTick] = useState(0);
-const [tab, setTab] = useState(“marches”);
-const [elapsed, setElapsed] = useState(“00:00:00”);
-const [startTime] = useState(Date.now());
+  const [state, setState] = useState(null);
+  const [tab, setTab] = useState("marches");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-useEffect(() => {
-if (!running) return;
-const t = setInterval(() => {
-const d = Math.floor((Date.now() - startTime) / 1000);
-setElapsed(`${String(Math.floor(d/3600)).padStart(2,"0")}:${String(Math.floor((d%3600)/60)).padStart(2,"0")}:${String(d%60).padStart(2,"0")}`);
-}, 1000);
-return () => clearInterval(t);
-}, [running]);
+  const fetchData = () => {
+    fetch("./data/state.json?t=" + Date.now())
+      .then(res => {
+        if (!res.ok) throw new Error("Pas encore de donnees");
+        return res.json();
+      })
+      .then(data => { setState(data); setLoading(false); setError(null); })
+      .catch(err => { setError(err.message); setLoading(false); });
+  };
 
-useEffect(() => {
-if (!running) return;
-const t = setInterval(() => {
-setPrices(prev => {
-const next = {};
-Object.keys(prev).forEach(id => { next[id] = generatePrice(prev[id], VOLATILITIES[id]); });
-return next;
-});
-setHistory(prev => {
-const next = {};
-Object.keys(prev).forEach(id => {
-next[id] = […prev[id].slice(-20), { price: prices[id], time: new Date().toLocaleTimeString() }];
-});
-return next;
-});
-setTick(t => t + 1);
-}, 2000);
-return () => clearInterval(t);
-}, [running, prices]);
+  useEffect(() => {
+    fetchData();
+    const interval = setInterval(fetchData, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
-useEffect(() => {
-if (!running || tick === 0) return;
-const newSignals = {};
-HALAL_INSTRUMENTS.forEach(inst => {
-const sig = analyzeSignal(prices[inst.id], history[inst.id] || []);
-newSignals[inst.id] = sig;
-if (sig === “ACHETER”) {
-const open = positions.find(p => p.id === inst.id);
-if (!open && capital > 100) {
-const amount = Math.min(capital * 0.15, 200);
-const qty = +(amount / prices[inst.id]).toFixed(6);
-const pos = { id: inst.id, name: inst.name, emoji: inst.emoji, entryPrice: prices[inst.id], qty, amount, tp: +(prices[inst.id] * 1.025).toFixed(2), sl: +(prices[inst.id] * 0.988).toFixed(2), openTime: new Date().toLocaleTimeString() };
-setPositions(prev => […prev, pos]);
-setCapital(prev => +(prev - amount).toFixed(2));
-}
-}
-});
-setSignals(newSignals);
+  const fmt = (id, price) => {
+    if (price == null) return "—";
+    if (id === "BTC" || id === "XAUUSD") return `$${price.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+    return `$${price}`;
+  };
 
-```
-setPositions(prev => {
-  const remaining = [];
-  prev.forEach(pos => {
-    const cur = prices[pos.id];
-    if (cur >= pos.tp || cur <= pos.sl) {
-      const gain = +((cur - pos.entryPrice) * pos.qty).toFixed(2);
-      setCapital(c => +(c + pos.amount + gain).toFixed(2));
-      setTrades(t => [{ id: pos.id, name: pos.name, emoji: pos.emoji, entryPrice: pos.entryPrice, exitPrice: cur, gain, pct: +((gain / pos.amount) * 100).toFixed(2), time: new Date().toLocaleTimeString(), result: gain > 0 ? "WIN" : "LOSS" }, ...t.slice(0, 29)]);
-    } else {
-      remaining.push({ ...pos, pnl: +((cur - pos.entryPrice) * pos.qty).toFixed(2) });
-    }
-  });
-  return remaining;
-});
-```
+  if (loading) {
+    return (
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", color: "#64748b" }}>
+        Chargement des donnees...
+      </div>
+    );
+  }
 
-}, [tick]);
+  if (error || !state) {
+    return (
+      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", color: "#64748b", padding: 20, textAlign: "center" }}>
+        <div style={{ fontSize: 32, marginBottom: 12 }}>🤖</div>
+        <div style={{ marginBottom: 8 }}>Le bot n'a pas encore tourne une premiere fois.</div>
+        <div style={{ fontSize: 12, color: "#475569" }}>Lance le workflow GitHub Actions manuellement ou attends le prochain cycle de 30 minutes.</div>
+      </div>
+    );
+  }
 
-const totalValue = capital + positions.reduce((s, p) => s + p.amount + (prices[p.id] - p.entryPrice) * p.qty, 0);
-const pnl = +(totalValue - INITIAL_CAPITAL).toFixed(2);
-const pct = +((pnl / INITIAL_CAPITAL) * 100).toFixed(2);
-const wins = trades.filter(t => t.result === “WIN”).length;
-const winRate = trades.length ? +((wins / trades.length) * 100).toFixed(1) : 0;
-const totalGain = +trades.reduce((s, t) => s + t.gain, 0).toFixed(2);
+  const positions = state.positions || [];
+  const trades = state.trades || [];
+  const signals = state.signals || {};
+  const capital = state.capital ?? INITIAL_CAPITAL;
 
-const fmt = (id, price) => {
-if (id === “BTC”) return `$${price.toLocaleString()}`;
-if (id === “XAUUSD”) return `$${price.toLocaleString()}`;
-return `$${price}`;
-};
+  const totalValue = capital + positions.reduce((sum, p) => {
+    const cur = signals[p.symbol]?.price ?? p.entry_price;
+    return sum + p.amount + (cur - p.entry_price) * p.qty;
+  }, 0);
+  const pnl = +(totalValue - INITIAL_CAPITAL).toFixed(2);
+  const pct = +((pnl / INITIAL_CAPITAL) * 100).toFixed(2);
+  const wins = trades.filter(t => t.result === "WIN").length;
+  const winRate = trades.length ? +((wins / trades.length) * 100).toFixed(1) : 0;
+  const totalGain = +trades.reduce((s, t) => s + t.gain, 0).toFixed(2);
 
-return (
-<div style={{ fontFamily: “Inter, sans-serif”, background: “#080d1a”, minHeight: “100vh”, paddingBottom: 40 }}>
-{/* Header */}
-<div style={{ background: “linear-gradient(135deg,#0f172a,#1a1f3e)”, borderBottom: “1px solid #1e3a5f”, padding: “14px 16px” }}>
-<div style={{ maxWidth: 800, margin: “0 auto”, display: “flex”, justifyContent: “space-between”, alignItems: “center” }}>
-<div>
-<div style={{ display: “flex”, alignItems: “center”, gap: 8 }}>
-<span style={{ fontSize: 22 }}>🌙</span>
-<span style={{ fontSize: 20, fontWeight: 800, color: “#c9a84c” }}>HalalBot</span>
-<span style={{ fontSize: 10, background: “#1e3a5f”, color: “#60a5fa”, padding: “2px 8px”, borderRadius: 10, fontWeight: 600 }}>PAPER TRADING</span>
-</div>
-<div style={{ fontSize: 11, color: “#475569”, marginTop: 2 }}>Sans intérêts · Sans levier · Sans CFD</div>
-</div>
-<div style={{ textAlign: “right” }}>
-{running && <div style={{ fontSize: 11, color: “#34d399”, marginBottom: 4 }}>● EN COURS · {elapsed}</div>}
-<button onClick={() => setRunning(r => !r)} style={{ background: running ? “#7f1d1d” : “#14532d”, color: running ? “#fca5a5” : “#86efac”, border: `1px solid ${running ? "#dc2626" : "#16a34a"}`, borderRadius: 8, padding: “7px 16px”, fontWeight: 700, fontSize: 13, cursor: “pointer” }}>
-{running ? “⏸ PAUSE” : “▶ DÉMARRER”}
-</button>
-</div>
-</div>
-</div>
-
-```
-  <div style={{ maxWidth: 800, margin: "0 auto", padding: "16px" }}>
-    {/* Stats */}
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 8, marginBottom: 8 }}>
-      <Card label="Capital" value={`${capital.toFixed(0)}€`} color="#60a5fa" />
-      <Card label="Total" value={`${totalValue.toFixed(0)}€`} color="#c9a84c" />
-      <Card label="P&L" value={`${pnl >= 0 ? "+" : ""}${pnl}€`} color={pnl >= 0 ? "#34d399" : "#f87171"} />
-      <Card label="Perf." value={`${pct >= 0 ? "+" : ""}${pct}%`} color={pct >= 0 ? "#34d399" : "#f87171"} />
-    </div>
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 8, marginBottom: 14 }}>
-      <Card label="Trades" value={trades.length} color="#e2e8f0" />
-      <Card label="Win Rate" value={`${winRate}%`} color="#e2e8f0" />
-      <Card label="Gain net" value={`${totalGain >= 0 ? "+" : ""}${totalGain}€`} color={totalGain >= 0 ? "#34d399" : "#f87171"} />
-      <Card label="Positions" value={positions.length} color="#e2e8f0" />
-    </div>
-
-    {/* Tabs */}
-    <div style={{ display: "flex", gap: 6, marginBottom: 14 }}>
-      {[["marches","Marchés"],["positions",`Positions (${positions.length})`],["historique",`Historique (${trades.length})`]].map(([key, label]) => (
-        <button key={key} onClick={() => setTab(key)} style={{ background: tab === key ? "#1e3a5f" : "#0f172a", color: tab === key ? "#60a5fa" : "#475569", border: `1px solid ${tab === key ? "#3b82f6" : "#1e3a5f"}`, borderRadius: 8, padding: "6px 12px", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>{label}</button>
-      ))}
-    </div>
-
-    {/* Marchés */}
-    {tab === "marches" && (
-      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        {!running && (
-          <div style={{ background: "#0f172a", borderRadius: 12, padding: 20, textAlign: "center", border: "1px dashed #1e3a5f", marginBottom: 8 }}>
-            <div style={{ fontSize: 32, marginBottom: 8 }}>🤖</div>
-            <div style={{ color: "#94a3b8", fontSize: 13, marginBottom: 4 }}>Bot prêt · Capital fictif 1 000€</div>
-            <div style={{ color: "#c9a84c", fontSize: 12 }}>Appuie sur DÉMARRER pour lancer la phase de test</div>
+  return (
+    <div style={{ fontFamily: "Inter, sans-serif", background: "#080d1a", minHeight: "100vh", paddingBottom: 40 }}>
+      <div style={{ background: "linear-gradient(135deg,#0f172a,#1a1f3e)", borderBottom: "1px solid #1e3a5f", padding: "14px 16px" }}>
+        <div style={{ maxWidth: 800, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{ fontSize: 22 }}>🌙</span>
+              <span style={{ fontSize: 20, fontWeight: 800, color: "#c9a84c" }}>HalalBot</span>
+              <span style={{ fontSize: 10, background: "#1e3a5f", color: "#60a5fa", padding: "2px 8px", borderRadius: 10, fontWeight: 600 }}>DONNEES REELLES</span>
+            </div>
+            <div style={{ fontSize: 11, color: "#475569", marginTop: 2 }}>
+              {state.last_update ? `Mis a jour: ${new Date(state.last_update).toLocaleString("fr-FR")}` : "Jamais mis a jour"}
+            </div>
+          </div>
+        </div>
+        {state.has_news_warning && (
+          <div style={{ maxWidth: 800, margin: "10px auto 0", background: "#451a03", border: "1px solid #d97706", borderRadius: 8, padding: "8px 12px", fontSize: 12, color: "#fbbf24" }}>
+            ⚠️ News a fort impact detectee — Le bot n'ouvre pas de nouvelles positions : {state.news_event}
           </div>
         )}
-        {HALAL_INSTRUMENTS.map(inst => {
-          const price = prices[inst.id];
-          const hist = history[inst.id] || [];
-          const prev = hist.length > 1 ? hist[hist.length - 2]?.price : price;
-          const change = prev ? +(((price - prev) / prev) * 100).toFixed(3) : 0;
-          const sig = signals[inst.id] || "ATTENDRE";
-          const isOpen = positions.find(p => p.id === inst.id);
-          return (
-            <div key={inst.id} style={{ background: "#0f172a", borderRadius: 12, padding: "14px 16px", border: `1px solid ${isOpen ? "#166534" : "#1e3a5f"}`, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <span style={{ fontSize: 24 }}>{inst.emoji}</span>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: 14 }}>{inst.name}</div>
-                  <div style={{ fontSize: 10, color: "#475569" }}>{inst.type} {isOpen ? "· 🟢 Ouvert" : "· Halal ✓"}</div>
-                </div>
-              </div>
-              <div style={{ textAlign: "right", minWidth: 90 }}>
-                <div style={{ fontWeight: 700, fontSize: 13 }}>{fmt(inst.id, price)}</div>
-                <div style={{ fontSize: 10, color: change >= 0 ? "#34d399" : "#f87171" }}>{change >= 0 ? "▲" : "▼"} {Math.abs(change)}%</div>
-              </div>
-              <Badge signal={sig} />
-            </div>
-          );
-        })}
       </div>
-    )}
 
-    {/* Positions */}
-    {tab === "positions" && (
-      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        {positions.length === 0 ? (
-          <div style={{ background: "#0f172a", borderRadius: 12, padding: 24, textAlign: "center", border: "1px solid #1e3a5f", color: "#475569", fontSize: 13 }}>Aucune position ouverte</div>
-        ) : positions.map((pos, i) => {
-          const cur = prices[pos.id];
-          const pnl = +((cur - pos.entryPrice) * pos.qty).toFixed(2);
-          const pct = +((pnl / pos.amount) * 100).toFixed(2);
-          return (
-            <div key={i} style={{ background: "#0f172a", borderRadius: 12, padding: "14px 16px", border: `1px solid ${pnl >= 0 ? "#166534" : "#7f1d1d"}` }}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <span style={{ fontSize: 20 }}>{pos.emoji}</span>
-                  <span style={{ fontWeight: 700 }}>{pos.name}</span>
-                </div>
-                <span style={{ color: pnl >= 0 ? "#34d399" : "#f87171", fontWeight: 800 }}>{pnl >= 0 ? "+" : ""}{pnl}€ ({pct}%)</span>
-              </div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 6, fontSize: 11 }}>
-                {[["Entrée", fmt(pos.id, pos.entryPrice)], ["Actuel", fmt(pos.id, cur)], ["Investi", `${pos.amount}€`], ["TP", fmt(pos.id, pos.tp), "#34d399"], ["SL", fmt(pos.id, pos.sl), "#f87171"], ["Ouvert", pos.openTime]].map(([l, v, c], j) => (
-                  <div key={j} style={{ background: "#1e293b", borderRadius: 6, padding: "5px 8px" }}>
-                    <div style={{ color: "#475569", fontSize: 9 }}>{l}</div>
-                    <div style={{ color: c || "#e2e8f0", fontWeight: 600, fontSize: 11 }}>{v}</div>
+      <div style={{ maxWidth: 800, margin: "0 auto", padding: "16px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 8, marginBottom: 8 }}>
+          <Card label="Capital" value={`${capital.toFixed(0)}€`} color="#60a5fa" />
+          <Card label="Total" value={`${totalValue.toFixed(0)}€`} color="#c9a84c" />
+          <Card label="P&L" value={`${pnl >= 0 ? "+" : ""}${pnl}€`} color={pnl >= 0 ? "#34d399" : "#f87171"} />
+          <Card label="Perf." value={`${pct >= 0 ? "+" : ""}${pct}%`} color={pct >= 0 ? "#34d399" : "#f87171"} />
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 8, marginBottom: 14 }}>
+          <Card label="Trades" value={trades.length} color="#e2e8f0" />
+          <Card label="Win Rate" value={`${winRate}%`} color="#e2e8f0" />
+          <Card label="Gain net" value={`${totalGain >= 0 ? "+" : ""}${totalGain}€`} color={totalGain >= 0 ? "#34d399" : "#f87171"} />
+          <Card label="Positions" value={positions.length} color="#e2e8f0" />
+        </div>
+
+        <div style={{ display: "flex", gap: 6, marginBottom: 14 }}>
+          {[["marches","Marches"],["positions",`Positions (${positions.length})`],["historique",`Historique (${trades.length})`]].map(([key, label]) => (
+            <button key={key} onClick={() => setTab(key)} style={{ background: tab === key ? "#1e3a5f" : "#0f172a", color: tab === key ? "#60a5fa" : "#475569", border: `1px solid ${tab === key ? "#3b82f6" : "#1e3a5f"}`, borderRadius: 8, padding: "6px 12px", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>{label}</button>
+          ))}
+        </div>
+
+        {tab === "marches" && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {Object.keys(INSTRUMENT_META).map(id => {
+              const sig = signals[id];
+              const meta = INSTRUMENT_META[id];
+              const isOpen = positions.find(p => p.symbol === id);
+              return (
+                <div key={id} style={{ background: "#0f172a", borderRadius: 12, padding: "14px 16px", border: `1px solid ${isOpen ? "#166534" : "#1e3a5f"}`, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <span style={{ fontSize: 24 }}>{meta.emoji}</span>
+                    <div>
+                      <div style={{ fontWeight: 700, fontSize: 14 }}>{id}</div>
+                      <div style={{ fontSize: 10, color: "#475569" }}>{meta.type} {isOpen ? "· 🟢 Ouvert" : "· Halal ✓"}</div>
+                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    )}
-
-    {/* Historique */}
-    {tab === "historique" && (
-      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-        {trades.length === 0 ? (
-          <div style={{ background: "#0f172a", borderRadius: 12, padding: 24, textAlign: "center", border: "1px solid #1e3a5f", color: "#475569", fontSize: 13 }}>Aucun trade clôturé</div>
-        ) : trades.map((t, i) => (
-          <div key={i} style={{ background: "#0f172a", borderRadius: 10, padding: "12px 14px", border: `1px solid ${t.result === "WIN" ? "#166534" : "#7f1d1d"}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ fontSize: 18 }}>{t.emoji}</span>
-              <div>
-                <div style={{ fontWeight: 600, fontSize: 13 }}>{t.name}</div>
-                <div style={{ fontSize: 10, color: "#475569" }}>{t.time} · {fmt(t.id, t.entryPrice)} → {fmt(t.id, t.exitPrice)}</div>
-              </div>
-            </div>
-            <div style={{ textAlign: "right" }}>
-              <div style={{ color: t.gain >= 0 ? "#34d399" : "#f87171", fontWeight: 800, fontSize: 14 }}>{t.gain >= 0 ? "+" : ""}{t.gain}€</div>
-              <div style={{ fontSize: 10, background: t.result === "WIN" ? "#14532d" : "#7f1d1d", color: t.result === "WIN" ? "#86efac" : "#fca5a5", padding: "1px 6px", borderRadius: 8, display: "inline-block" }}>{t.result} · {t.pct}%</div>
-            </div>
+                  <div style={{ textAlign: "right", minWidth: 90 }}>
+                    <div style={{ fontWeight: 700, fontSize: 13 }}>{fmt(id, sig?.price)}</div>
+                    <div style={{ fontSize: 9, color: "#475569" }}>{sig?.reason || "En attente"}</div>
+                  </div>
+                  <Badge signal={sig?.signal || "ATTENDRE"} />
+                </div>
+              );
+            })}
           </div>
-        ))}
+        )}
+
+        {tab === "positions" && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {positions.length === 0 ? (
+              <div style={{ background: "#0f172a", borderRadius: 12, padding: 24, textAlign: "center", border: "1px solid #1e3a5f", color: "#475569", fontSize: 13 }}>Aucune position ouverte</div>
+            ) : positions.map((pos, i) => {
+              const cur = signals[pos.symbol]?.price ?? pos.entry_price;
+              const pnlPos = +((cur - pos.entry_price) * pos.qty).toFixed(2);
+              const pctPos = +((pnlPos / pos.amount) * 100).toFixed(2);
+              return (
+                <div key={i} style={{ background: "#0f172a", borderRadius: 12, padding: "14px 16px", border: `1px solid ${pnlPos >= 0 ? "#166534" : "#7f1d1d"}` }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
+                    <span style={{ fontWeight: 700 }}>{INSTRUMENT_META[pos.symbol]?.emoji} {pos.name}</span>
+                    <span style={{ color: pnlPos >= 0 ? "#34d399" : "#f87171", fontWeight: 800 }}>{pnlPos >= 0 ? "+" : ""}{pnlPos}€ ({pctPos}%)</span>
+                  </div>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 6, fontSize: 11 }}>
+                    {[["Entree", fmt(pos.symbol, pos.entry_price)], ["Actuel", fmt(pos.symbol, cur)], ["Investi", `${pos.amount}€`], ["TP", fmt(pos.symbol, pos.tp), "#34d399"], ["SL", fmt(pos.symbol, pos.sl), "#f87171"]].map(([l, v, c], j) => (
+                      <div key={j} style={{ background: "#1e293b", borderRadius: 6, padding: "5px 8px" }}>
+                        <div style={{ color: "#475569", fontSize: 9 }}>{l}</div>
+                        <div style={{ color: c || "#e2e8f0", fontWeight: 600, fontSize: 11 }}>{v}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {tab === "historique" && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            {trades.length === 0 ? (
+              <div style={{ background: "#0f172a", borderRadius: 12, padding: 24, textAlign: "center", border: "1px solid #1e3a5f", color: "#475569", fontSize: 13 }}>Aucun trade cloture</div>
+            ) : trades.slice().reverse().map((t, i) => (
+              <div key={i} style={{ background: "#0f172a", borderRadius: 10, padding: "12px 14px", border: `1px solid ${t.result === "WIN" ? "#166534" : "#7f1d1d"}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: 13 }}>{INSTRUMENT_META[t.symbol]?.emoji} {t.name}</div>
+                  <div style={{ fontSize: 10, color: "#475569" }}>{new Date(t.time).toLocaleString("fr-FR")} · {fmt(t.symbol, t.entry_price)} → {fmt(t.symbol, t.exit_price)}</div>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <div style={{ color: t.gain >= 0 ? "#34d399" : "#f87171", fontWeight: 800, fontSize: 14 }}>{t.gain >= 0 ? "+" : ""}{t.gain}€</div>
+                  <div style={{ fontSize: 10, background: t.result === "WIN" ? "#14532d" : "#7f1d1d", color: t.result === "WIN" ? "#86efac" : "#fca5a5", padding: "1px 6px", borderRadius: 8, display: "inline-block" }}>{t.result} · {t.pct}%</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div style={{ marginTop: 16, background: "#0f172a", borderRadius: 10, padding: 12, border: "1px solid #1e3a5f", textAlign: "center" }}>
+          <div style={{ fontSize: 10, color: "#475569" }}>🌙 Or · Bitcoin Spot · Actions directes · Zero interets · Zero levier · Zero CFD</div>
+          <div style={{ fontSize: 10, color: "#334155", marginTop: 3 }}>Phase de test · Capital fictif 1 000€ · Vraies donnees de marche · Aucun argent reel engage</div>
+        </div>
       </div>
-    )}
-
-    <div style={{ marginTop: 16, background: "#0f172a", borderRadius: 10, padding: 12, border: "1px solid #1e3a5f", textAlign: "center" }}>
-      <div style={{ fontSize: 10, color: "#475569" }}>🌙 Or · Bitcoin Spot · Actions directes · Zéro intérêts · Zéro levier · Zéro CFD</div>
-      <div style={{ fontSize: 10, color: "#334155", marginTop: 3 }}>Phase de test · Capital fictif 1 000€ · Aucun argent réel engagé</div>
     </div>
-  </div>
-</div>
-```
-
-);
+  );
 }
 
-ReactDOM.createRoot(document.getElementById(“root”)).render(<App />);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 </script>
-
 </body>
 </html>
+
