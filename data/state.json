@@ -4,11 +4,42 @@
   "trades": [],
   "price_history": {
     "XAUUSD": [],
-    "BTC": [],
-    "NVDA": [],
-    "MSFT": [],
-    "AAPL": []
+    "BTC": [
+      63903.0
+    ],
+    "NVDA": [
+      204.65
+    ],
+    "MSFT": [
+      378.91
+    ],
+    "AAPL": [
+      295.95
+    ]
   },
-  "signals": {},
-  "last_update": null
+  "signals": {
+    "BTC": {
+      "signal": "ATTENDRE",
+      "reason": "Historique insuffisant",
+      "price": 63903.0
+    },
+    "NVDA": {
+      "signal": "ATTENDRE",
+      "reason": "Historique insuffisant",
+      "price": 204.65
+    },
+    "MSFT": {
+      "signal": "ATTENDRE",
+      "reason": "Historique insuffisant",
+      "price": 378.91
+    },
+    "AAPL": {
+      "signal": "ATTENDRE",
+      "reason": "Historique insuffisant",
+      "price": 295.95
+    }
+  },
+  "last_update": "2026-06-18T13:44:58.123924+00:00",
+  "has_news_warning": false,
+  "news_event": null
 }
