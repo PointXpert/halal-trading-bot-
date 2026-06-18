@@ -1,0 +1,243 @@
+"""
+HalalBot - Bot de paper trading avec vraies données de marché
+100% halal - Sans intérêts, sans levier, sans CFD
+"""
+import os
+import json
+import time
+import requests
+from datetime import datetime, timezone
+
+ALPHA_VANTAGE_KEY = os.environ.get("ALPHA_VANTAGE_KEY", "")
+FINNHUB_KEY = os.environ.get("FINNHUB_KEY", "")
+
+DATA_FILE = "data/state.json"
+
+INSTRUMENTS = {
+    "XAUUSD": {"name": "Or / Gold", "type": "commodity", "symbol": "XAU"},
+    "BTC": {"name": "Bitcoin", "type": "crypto", "symbol": "bitcoin"},
+    "NVDA": {"name": "Nvidia", "type": "stock", "symbol": "NVDA"},
+    "MSFT": {"name": "Microsoft", "type": "stock", "symbol": "MSFT"},
+    "AAPL": {"name": "Apple", "type": "stock", "symbol": "AAPL"},
+}
+
+INITIAL_CAPITAL = 1000.0
+
+
+def load_state():
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, "r") as f:
+            return json.load(f)
+    return {
+        "capital": INITIAL_CAPITAL,
+        "positions": [],
+        "trades": [],
+        "price_history": {k: [] for k in INSTRUMENTS},
+        "last_update": None,
+    }
+
+
+def save_state(state):
+    os.makedirs("data", exist_ok=True)
+    with open(DATA_FILE, "w") as f:
+        json.dump(state, f, indent=2)
+
+
+def get_btc_price():
+    try:
+        r = requests.get(
+            "https://api.coingecko.com/api/v3/simple/price",
+            params={"ids": "bitcoin", "vs_currencies": "usd"},
+            timeout=10,
+        )
+        return float(r.json()["bitcoin"]["usd"])
+    except Exception as e:
+        print(f"Erreur BTC: {e}")
+        return None
+
+
+def get_gold_price():
+    try:
+        r = requests.get(
+            "https://www.alphavantage.co/query",
+            params={
+                "function": "CURRENCY_EXCHANGE_RATE",
+                "from_currency": "XAU",
+                "to_currency": "USD",
+                "apikey": ALPHA_VANTAGE_KEY,
+            },
+            timeout=10,
+        )
+        data = r.json()
+        rate = data.get("Realtime Currency Exchange Rate", {}).get("5. Exchange Rate")
+        return float(rate) if rate else None
+    except Exception as e:
+        print(f"Erreur Gold: {e}")
+        return None
+
+
+def get_stock_price(symbol):
+    try:
+        r = requests.get(
+            "https://www.alphavantage.co/query",
+            params={
+                "function": "GLOBAL_QUOTE",
+                "symbol": symbol,
+                "apikey": ALPHA_VANTAGE_KEY,
+            },
+            timeout=10,
+        )
+        data = r.json()
+        price = data.get("Global Quote", {}).get("05. price")
+        return float(price) if price else None
+    except Exception as e:
+        print(f"Erreur {symbol}: {e}")
+        return None
+
+
+def get_high_impact_news():
+    try:
+        r = requests.get(
+            "https://finnhub.io/api/v1/calendar/economic",
+            params={"token": FINNHUB_KEY},
+            timeout=10,
+        )
+        data = r.json()
+        events = data.get("economicCalendar", [])
+        now = datetime.now(timezone.utc).timestamp()
+        for event in events:
+            if event.get("impact") == "high":
+                event_time = event.get("time", 0)
+                if 0 < (event_time - now) < 3600:
+                    return True, event.get("event", "News importante")
+        return False, None
+    except Exception as e:
+        print(f"Erreur news: {e}")
+        return False, None
+
+
+def fetch_all_prices():
+    prices = {}
+    prices["BTC"] = get_btc_price()
+    time.sleep(1)
+    prices["XAUUSD"] = get_gold_price()
+    time.sleep(12)
+    prices["NVDA"] = get_stock_price("NVDA")
+    time.sleep(12)
+    prices["MSFT"] = get_stock_price("MSFT")
+    time.sleep(12)
+    prices["AAPL"] = get_stock_price("AAPL")
+    return prices
+
+
+def calculate_rsi(history, period=14):
+    if len(history) < period + 1:
+        return 50
+    gains, losses = [], []
+    for i in range(1, len(history)):
+        diff = history[i] - history[i - 1]
+        if diff > 0:
+            gains.append(diff)
+        else:
+            losses.append(abs(diff))
+    avg_gain = sum(gains[-period:]) / period if gains else 0
+    avg_loss = sum(losses[-period:]) / period if losses else 0.0001
+    rs = avg_gain / avg_loss if avg_loss else 0
+    rsi = 100 - (100 / (1 + rs))
+    return rsi
+
+
+def analyze_signal(symbol, current_price, history):
+    if len(history) < 10:
+        return "ATTENDRE", "Historique insuffisant"
+
+    recent = history[-10:]
+    avg = sum(recent) / len(recent)
+    rsi = calculate_rsi(history)
+
+    if current_price > avg * 1.005 and rsi < 70:
+        return "ACHETER", f"Prix au-dessus MM10 (+{((current_price/avg-1)*100):.2f}%), RSI={rsi:.0f}"
+    elif current_price < avg * 0.995 and rsi > 30:
+        return "VENDRE", f"Prix sous MM10 ({((current_price/avg-1)*100):.2f}%), RSI={rsi:.0f}"
+    else:
+        return "ATTENDRE", f"Pas de signal clair, RSI={rsi:.0f}"
+
+
+def run_bot():
+    state = load_state()
+    print(f"=== HalalBot - {datetime.now(timezone.utc).isoformat()} ===")
+
+    has_news, news_event = get_high_impact_news()
+    if has_news:
+        print(f"News a fort impact detectee: {news_event}")
+
+    prices = fetch_all_prices()
+    print(f"Prix recuperes: {prices}")
+
+    signals = {}
+    for symbol, price in prices.items():
+        if price is None:
+            continue
+
+        history = state["price_history"].setdefault(symbol, [])
+        history.append(price)
+        state["price_history"][symbol] = history[-50:]
+
+        signal, reason = analyze_signal(symbol, price, history)
+        signals[symbol] = {"signal": signal, "reason": reason, "price": price}
+        print(f"{symbol}: {price} -> {signal} ({reason})")
+
+        if signal == "ACHETER" and not has_news:
+            already_open = any(p["symbol"] == symbol for p in state["positions"])
+            if not already_open and state["capital"] > 100:
+                amount = min(state["capital"] * 0.15, 200)
+                qty = amount / price
+                position = {
+                    "symbol": symbol,
+                    "name": INSTRUMENTS[symbol]["name"],
+                    "entry_price": price,
+                    "qty": qty,
+                    "amount": amount,
+                    "tp": round(price * 1.025, 2),
+                    "sl": round(price * 0.988, 2),
+                    "open_time": datetime.now(timezone.utc).isoformat(),
+                }
+                state["positions"].append(position)
+                state["capital"] = round(state["capital"] - amount, 2)
+                print(f"  -> POSITION OUVERTE: {amount} EUR sur {symbol}")
+
+        remaining = []
+        for pos in state["positions"]:
+            if pos["symbol"] != symbol:
+                remaining.append(pos)
+                continue
+            if price >= pos["tp"] or price <= pos["sl"]:
+                gain = round((price - pos["entry_price"]) * pos["qty"], 2)
+                state["capital"] = round(state["capital"] + pos["amount"] + gain, 2)
+                state["trades"].append({
+                    "symbol": symbol,
+                    "name": pos["name"],
+                    "entry_price": pos["entry_price"],
+                    "exit_price": price,
+                    "gain": gain,
+                    "pct": round((gain / pos["amount"]) * 100, 2),
+                    "time": datetime.now(timezone.utc).isoformat(),
+                    "result": "WIN" if gain > 0 else "LOSS",
+                })
+                print(f"  -> POSITION FERMEE: {gain} EUR sur {symbol}")
+            else:
+                remaining.append(pos)
+        state["positions"] = [p for p in state["positions"] if p["symbol"] != symbol] + \
+                              [p for p in remaining if p["symbol"] == symbol]
+
+    state["signals"] = signals
+    state["last_update"] = datetime.now(timezone.utc).isoformat()
+    state["has_news_warning"] = has_news
+    state["news_event"] = news_event
+
+    save_state(state)
+    print("=== Mise a jour terminee ===")
+
+
+if __name__ == "__main__":
+    run_bot()
