@@ -1,0 +1,38 @@
+name: HalalBot Trading Cycle
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run bot
+        env:
+          ALPHA_VANTAGE_KEY: ${{ secrets.ALPHA_VANTAGE_KEY }}
+          FINNHUB_KEY: ${{ secrets.FINNHUB_KEY }}
+        run: python bot.py
+
+      - name: Commit and push updated data
+        run: |
+          git config --local user.email "bot@halalbot.local"
+          git config --local user.name "HalalBot"
+          git add data/state.json
+          git diff --quiet --cached || git commit -m "Mise a jour automatique des donnees"
+          git push
