@@ -20,6 +20,11 @@ INSTRUMENTS = {
     "MSFT": {"name": "Microsoft", "type": "stock", "symbol": "MSFT"},
     "AAPL": {"name": "Apple", "type": "stock", "symbol": "AAPL"},
     "TSLA": {"name": "Tesla", "type": "stock", "symbol": "TSLA"},
-        "AMZN": {"name": "Amazon", "type": "stock", "symbol": "AMZN"},
+    "AMZN": {"name": "Amazon", "type": "stock", "symbol": "AMZN"},
+    "GOOGL": {"name": "Alphabet", "type": "stock", "symbol": "GOOGL"},
+    "LLY": {"name": "Eli Lilly", "type": "stock", "symbol": "LLY"},
+    "ASML": {"name": "ASML", "type": "stock", "symbol": "ASML"},
+}
+
 
 
