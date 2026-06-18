@@ -2,7 +2,7 @@ name: HalalBot Trading Cycle
 
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "0 * * * *"
   workflow_dispatch: {}
 
 permissions:
