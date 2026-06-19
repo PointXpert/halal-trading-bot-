@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -23,19 +24,206 @@ const { useState, useEffect } = React;
 const INITIAL_CAPITAL = 1000;
 
 const INSTRUMENT_META = {
-  XAUUSD: { emoji: "🥇", type: "Matiere premiere" },
-  BTC: { emoji: "₿", type: "Crypto Halal" },
-  NVDA: { emoji: "💻", type: "Action Tech" },
-  MSFT: { emoji: "🖥️", type: "Action Tech" },
-  AAPL: { emoji: "📱", type: "Action Tech" },
-  TSLA: { emoji: "🚗", type: "Action Tech" },
-  AMZN: { emoji: "📦", type: "Action Tech" },
-  GOOGL: { emoji: "🔍", type: "Action Tech" },
-  LLY: { emoji: "💊", type: "Action Pharma" },
-  ASML: { emoji: "🔬", type: "Action Tech" },
+XAUUSD: { emoji: “🥇”, type: “Matiere premiere”, base: 2350 },
+BTC: { emoji: “₿”, type: “Crypto Halal”, base: 62000 },
+NVDA: { emoji: “💻”, type: “Action Tech”, base: 135 },
+MSFT: { emoji: “🖥️”, type: “Action Tech”, base: 440 },
+AAPL: { emoji: “📱”, type: “Action Tech”, base: 195 },
+TSLA: { emoji: “🚗”, type: “Action Tech”, base: 250 },
+AMZN: { emoji: “📦”, type: “Action Tech”, base: 185 },
+GOOGL: { emoji: “🔍”, type: “Action Tech”, base: 175 },
+LLY: { emoji: “💊”, type: “Action Pharma”, base: 780 },
+ASML: { emoji: “🔬”, type: “Action Tech”, base: 950 },
 };
 
+const SYMBOLS = Object.keys(INSTRUMENT_META);
+
+function randomSignal() {
+const r = Math.random();
+if (r < 0.4) return “ACHETER”;
+if (r < 0.8) return “VENDRE”;
+return “ATTENDRE”;
+}
+
+function randomPct() {
+return +(Math.random() * 3 + 0.3).toFixed(2);
+}
+
 const Badge = ({ signal }) => {
-  const map = { ACHETER: ["#16a34a", "▲ ACHETER"], VENDRE: ["#dc2626", "▼ VENDRE"], ATTENDRE: ["#d97706", "◆ ATTENDRE"] };
-  const [bg, label] = map[signal] || map.ATTENDRE;
-  return <span style={{ background: bg, color: "white", fontSize: 10, fontWeight: 700, padding: "3px 8px", borderR​​​​​​​​​​​​​​​​
+const map = {
+ACHETER: [”#16a34a”, “▲ ACHETER”],
+VENDRE: [”#dc2626”, “▼ VENDRE”],
+ATTENDRE: [”#d97706”, “◆ ATTENDRE”],
+};
+const [bg, label] = map[signal] || map.ATTENDRE;
+return (
+<span style={{ background: bg, color: “white”, fontSize: 10, fontWeight: 700, padding: “3px 8px”, borderRadius: 6 }}>
+{label}
+</span>
+);
+};
+
+function App() {
+const [capital, setCapital] = useState(INITIAL_CAPITAL);
+const [trades, setTrades] = useState([]);
+const [signals, setSignals] = useState(() =>
+SYMBOLS.map((sym) => ({ symbol: sym, signal: randomSignal(), pct: randomPct() }))
+);
+
+useEffect(() => {
+const interval = setInterval(() => {
+setSignals(SYMBOLS.map((sym) => ({ symbol: sym, signal: randomSignal(), pct: randomPct() })));
+}, 8000);
+return () => clearInterval(interval);
+}, []);
+
+const executeTrade = (symbol, signal, pct) => {
+if (signal === “ATTENDRE”) return;
+const stake = +(capital * 0.05).toFixed(2);
+const win = Math.random() < 0.55;
+const gain = win ? +(stake * (pct / 100)).toFixed(2) : -+(stake * (pct / 100) * 0.6).toFixed(2);
+const newTrade = {
+id: Date.now(),
+symbol,
+signal,
+pct,
+stake,
+gain,
+result: win ? “WIN” : “LOSS”,
+time: new Date().toLocaleTimeString(“fr-FR”),
+};
+setTrades((prev) => [newTrade, …prev].slice(0, 30));
+setCapital((prev) => +(prev + gain).toFixed(2));
+};
+
+const resetCapital = () => {
+setCapital(INITIAL_CAPITAL);
+setTrades([]);
+};
+
+const totalGain = +(capital - INITIAL_CAPITAL).toFixed(2);
+const gainPct = +((totalGain / INITIAL_CAPITAL) * 100).toFixed(2);
+
+return (
+<div style={{ maxWidth: 480, margin: “0 auto”, padding: 16, paddingBottom: 40 }}>
+<div style={{ textAlign: “center”, marginBottom: 20 }}>
+<div style={{ fontSize: 20, fontWeight: 800 }}>🕌 HalalBot</div>
+<div style={{ fontSize: 11, color: “#64748b” }}>Paper Trading — Capital fictif</div>
+</div>
+
+```
+  <div style={{ background: "#0f172a", border: "1px solid #1e3a5f", borderRadius: 14, padding: 18, marginBottom: 20, textAlign: "center" }}>
+    <div style={{ fontSize: 11, color: "#64748b", marginBottom: 4 }}>CAPITAL ACTUEL</div>
+    <div style={{ fontSize: 32, fontWeight: 800 }}>{capital.toFixed(2)}€</div>
+    <div style={{ fontSize: 13, fontWeight: 700, marginTop: 4, color: totalGain >= 0 ? "#34d399" : "#f87171" }}>
+      {totalGain >= 0 ? "+" : ""}{totalGain}€ ({gainPct >= 0 ? "+" : ""}{gainPct}%)
+    </div>
+    <button
+      onClick={resetCapital}
+      style={{ marginTop: 12, background: "#1e293b", color: "#94a3b8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 11, cursor: "pointer" }}
+    >
+      ↺ Réinitialiser
+    </button>
+  </div>
+
+  <div style={{ fontSize: 12, fontWeight: 700, color: "#64748b", marginBottom: 8, letterSpacing: 1 }}>
+    SIGNAUX EN DIRECT
+  </div>
+
+  <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 24 }}>
+    {signals.map((s) => {
+      const meta = INSTRUMENT_META[s.symbol];
+      return (
+        <div
+          key={s.symbol}
+          style={{ background: "#0f172a", border: "1px solid #1e293b", borderRadius: 10, padding: 12, display: "flex", alignItems: "center", justifyContent: "space-between" }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{ fontSize: 22 }}>{meta.emoji}</div>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 14 }}>{s.symbol}</div>
+              <div style={{ fontSize: 10, color: "#475569" }}>{meta.type}</div>
+            </div>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <Badge signal={s.signal} />
+            <button
+              onClick={() => executeTrade(s.symbol, s.signal, s.pct)}
+              disabled={s.signal === "ATTENDRE"}
+              style={{
+                background: s.signal === "ATTENDRE" ? "#1e293b" : "#2563eb",
+                color: s.signal === "ATTENDRE" ? "#475569" : "white",
+                border: "none",
+                borderRadius: 6,
+                padding: "6px 10px",
+                fontSize: 11,
+                fontWeight: 700,
+                cursor: s.signal === "ATTENDRE" ? "default" : "pointer",
+              }}
+            >
+              Exécuter
+            </button>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  <div style={{ fontSize: 12, fontWeight: 700, color: "#64748b", marginBottom: 8, letterSpacing: 1 }}>
+    HISTORIQUE DES TRADES
+  </div>
+
+  {trades.length === 0 ? (
+    <div style={{ textAlign: "center", color: "#334155", fontSize: 12, padding: 24 }}>
+      Aucun trade exécuté pour le moment.
+    </div>
+  ) : (
+    <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 16 }}>
+      {trades.map((t) => (
+        <div
+          key={t.id}
+          style={{ background: "#0f172a", borderRadius: 8, padding: 10, display: "flex", alignItems: "center", justifyContent: "space-between" }}
+        >
+          <div>
+            <div style={{ fontSize: 12, fontWeight: 700 }}>
+              {INSTRUMENT_META[t.symbol].emoji} {t.symbol}
+            </div>
+            <div style={{ fontSize: 9, color: "#475569" }}>{t.time}</div>
+          </div>
+          <div style={{ textAlign: "right" }}>
+            <div style={{ fontSize: 13, fontWeight: 800, color: t.gain >= 0 ? "#34d399" : "#f87171" }}>
+              {t.gain >= 0 ? "+" : ""}{t.gain}€
+            </div>
+            <div
+              style={{
+                fontSize: 10,
+                background: t.result === "WIN" ? "#14532d" : "#7f1d1d",
+                color: t.result === "WIN" ? "#86efac" : "#fca5a5",
+                padding: "1px 6px",
+                borderRadius: 8,
+                display: "inline-block",
+              }}
+            >
+              {t.result} · {t.pct}%
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )}
+
+  <div style={{ marginTop: 16, background: "#0f172a", borderRadius: 10, padding: 12, border: "1px solid #1e3a5f", textAlign: "center" }}>
+    <div style={{ fontSize: 10, color: "#475569" }}>🌙 Or · Bitcoin Spot · Actions directes · Zéro intérêts · Zéro levier · Zéro CFD</div>
+    <div style={{ fontSize: 10, color: "#334155", marginTop: 3 }}>Phase de test · Capital fictif 1 000€ · Aucun argent réel engagé</div>
+  </div>
+</div>
+```
+
+);
+}
+
+ReactDOM.createRoot(document.getElementById(“root”)).render(<App />);
+</script>
+
+</body>
+</html>
