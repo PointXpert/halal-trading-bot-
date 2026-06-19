@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -11,220 +10,175 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #080d1a; color: #e2e8f0; font-family: 'Inter', sans-serif; }
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: #0f172a; }
-  ::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 2px; }
 </style>
 </head>
 <body>
 <div id="root"></div>
 <script type="text/babel">
 const { useState, useEffect } = React;
-
 const INITIAL_CAPITAL = 1000;
 
 const INSTRUMENT_META = {
-XAUUSD: { emoji: "🥇", type: "Matiere premiere", base: 2350 },
-
-BTC: { emoji: “₿”, type: “Crypto Halal”, base: 62000 },
-NVDA: { emoji: “💻”, type: “Action Tech”, base: 135 },
-MSFT: { emoji: “🖥️”, type: “Action Tech”, base: 440 },
-AAPL: { emoji: “📱”, type: “Action Tech”, base: 195 },
-TSLA: { emoji: “🚗”, type: “Action Tech”, base: 250 },
-AMZN: { emoji: “📦”, type: “Action Tech”, base: 185 },
-GOOGL: { emoji: “🔍”, type: “Action Tech”, base: 175 },
-LLY: { emoji: “💊”, type: “Action Pharma”, base: 780 },
-ASML: { emoji: “🔬”, type: “Action Tech”, base: 950 },
+  XAUUSD: { emoji: "🥇", type: "Matiere premiere" },
+  BTC: { emoji: "₿", type: "Crypto Halal" },
+  NVDA: { emoji: "💻", type: "Action Tech" },
+  MSFT: { emoji: "🖥️", type: "Action Tech" },
+  AAPL: { emoji: "📱", type: "Action Tech" },
+  TSLA: { emoji: "🚗", type: "Action Tech" },
+  AMZN: { emoji: "📦", type: "Action Tech" },
+  GOOGL: { emoji: "🔍", type: "Action Tech" },
+  LLY: { emoji: "💊", type: "Action Pharma" },
+  ASML: { emoji: "🔬", type: "Action Tech" },
 };
-
-const SYMBOLS = Object.keys(INSTRUMENT_META);
-
-function randomSignal() {
-const r = Math.random();
-if (r < 0.4) return “ACHETER”;
-if (r < 0.8) return “VENDRE”;
-return “ATTENDRE”;
-}
-
-function randomPct() {
-return +(Math.random() * 3 + 0.3).toFixed(2);
-}
 
 const Badge = ({ signal }) => {
-const map = {
-ACHETER: [”#16a34a”, “▲ ACHETER”],
-VENDRE: [”#dc2626”, “▼ VENDRE”],
-ATTENDRE: [”#d97706”, “◆ ATTENDRE”],
+  const map = { ACHETER: ["#16a34a", "ACHETER"], VENDRE: ["#dc2626", "VENDRE"], ATTENDRE: ["#d97706", "ATTENDRE"] };
+  const [bg, label] = map[signal] || map.ATTENDRE;
+  return <span style={{ background: bg, color: "white", fontSize: 10, fontWeight: 700, padding: "3px 8px", borderRadius: 20 }}>{label}</span>;
 };
-const [bg, label] = map[signal] || map.ATTENDRE;
-return (
-<span style={{ background: bg, color: “white”, fontSize: 10, fontWeight: 700, padding: “3px 8px”, borderRadius: 6 }}>
-{label}
-</span>
+
+const Card = ({ label, value, color }) => (
+  <div style={{ background: "#0f172a", borderRadius: 10, padding: "10px 8px", textAlign: "center", border: "1px solid #1e3a5f" }}>
+    <div style={{ fontSize: 9, color: "#475569", marginBottom: 3 }}>{label}</div>
+    <div style={{ fontSize: 14, fontWeight: 800, color }}>{value}</div>
+  </div>
 );
-};
 
 function App() {
-const [capital, setCapital] = useState(INITIAL_CAPITAL);
-const [trades, setTrades] = useState([]);
-const [signals, setSignals] = useState(() =>
-SYMBOLS.map((sym) => ({ symbol: sym, signal: randomSignal(), pct: randomPct() }))
-);
+  const [state, setState] = useState(null);
+  const [tab, setTab] = useState("marches");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-useEffect(() => {
-const interval = setInterval(() => {
-setSignals(SYMBOLS.map((sym) => ({ symbol: sym, signal: randomSignal(), pct: randomPct() })));
-}, 8000);
-return () => clearInterval(interval);
-}, []);
+  const fetchData = () => {
+    fetch("./data/state.json?t=" + Date.now())
+      .then(res => { if (!res.ok) throw new Error("no data"); return res.json(); })
+      .then(data => { setState(data); setLoading(false); setError(null); })
+      .catch(err => { setError(err.message); setLoading(false); });
+  };
 
-const executeTrade = (symbol, signal, pct) => {
-if (signal === “ATTENDRE”) return;
-const stake = +(capital * 0.05).toFixed(2);
-const win = Math.random() < 0.55;
-const gain = win ? +(stake * (pct / 100)).toFixed(2) : -+(stake * (pct / 100) * 0.6).toFixed(2);
-const newTrade = {
-id: Date.now(),
-symbol,
-signal,
-pct,
-stake,
-gain,
-result: win ? “WIN” : “LOSS”,
-time: new Date().toLocaleTimeString(“fr-FR”),
-};
-setTrades((prev) => [newTrade, …prev].slice(0, 30));
-setCapital((prev) => +(prev + gain).toFixed(2));
-};
+  useEffect(() => {
+    fetchData();
+    const interval = setInterval(fetchData, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
-const resetCapital = () => {
-setCapital(INITIAL_CAPITAL);
-setTrades([]);
-};
+  const fmt = (id, price) => {
+    if (price == null) return "-";
+    if (id === "BTC" || id === "XAUUSD") return "$" + price.toLocaleString(undefined, { maximumFractionDigits: 2 });
+    return "$" + price;
+  };
 
-const totalGain = +(capital - INITIAL_CAPITAL).toFixed(2);
-const gainPct = +((totalGain / INITIAL_CAPITAL) * 100).toFixed(2);
+  if (loading) return <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", color: "#64748b" }}>Chargement...</div>;
 
-return (
-<div style={{ maxWidth: 480, margin: “0 auto”, padding: 16, paddingBottom: 40 }}>
-<div style={{ textAlign: “center”, marginBottom: 20 }}>
-<div style={{ fontSize: 20, fontWeight: 800 }}>🕌 HalalBot</div>
-<div style={{ fontSize: 11, color: “#64748b” }}>Paper Trading — Capital fictif</div>
-</div>
+  if (error || !state) {
+    return (
+      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", color: "#64748b", padding: 20, textAlign: "center" }}>
+        <div style={{ fontSize: 32, marginBottom: 12 }}>Bot</div>
+        <div>Le bot n'a pas encore tourne une premiere fois.</div>
+      </div>
+    );
+  }
 
-```
-  <div style={{ background: "#0f172a", border: "1px solid #1e3a5f", borderRadius: 14, padding: 18, marginBottom: 20, textAlign: "center" }}>
-    <div style={{ fontSize: 11, color: "#64748b", marginBottom: 4 }}>CAPITAL ACTUEL</div>
-    <div style={{ fontSize: 32, fontWeight: 800 }}>{capital.toFixed(2)}€</div>
-    <div style={{ fontSize: 13, fontWeight: 700, marginTop: 4, color: totalGain >= 0 ? "#34d399" : "#f87171" }}>
-      {totalGain >= 0 ? "+" : ""}{totalGain}€ ({gainPct >= 0 ? "+" : ""}{gainPct}%)
-    </div>
-    <button
-      onClick={resetCapital}
-      style={{ marginTop: 12, background: "#1e293b", color: "#94a3b8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 11, cursor: "pointer" }}
-    >
-      ↺ Réinitialiser
-    </button>
-  </div>
+  const positions = state.positions || [];
+  const trades = state.trades || [];
+  const signals = state.signals || {};
+  const capital = state.capital ?? INITIAL_CAPITAL;
 
-  <div style={{ fontSize: 12, fontWeight: 700, color: "#64748b", marginBottom: 8, letterSpacing: 1 }}>
-    SIGNAUX EN DIRECT
-  </div>
+  const totalValue = capital + positions.reduce((sum, p) => {
+    const cur = (signals[p.symbol] && signals[p.symbol].price) || p.entry_price;
+    return sum + p.amount + (cur - p.entry_price) * p.qty;
+  }, 0);
+  const pnl = +(totalValue - INITIAL_CAPITAL).toFixed(2);
+  const pct = +((pnl / INITIAL_CAPITAL) * 100).toFixed(2);
+  const wins = trades.filter(t => t.result === "WIN").length;
+  const winRate = trades.length ? +((wins / trades.length) * 100).toFixed(1) : 0;
+  const totalGain = +trades.reduce((s, t) => s + t.gain, 0).toFixed(2);
 
-  <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 24 }}>
-    {signals.map((s) => {
-      const meta = INSTRUMENT_META[s.symbol];
-      return (
-        <div
-          key={s.symbol}
-          style={{ background: "#0f172a", border: "1px solid #1e293b", borderRadius: 10, padding: 12, display: "flex", alignItems: "center", justifyContent: "space-between" }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ fontSize: 22 }}>{meta.emoji}</div>
-            <div>
-              <div style={{ fontWeight: 700, fontSize: 14 }}>{s.symbol}</div>
-              <div style={{ fontSize: 10, color: "#475569" }}>{meta.type}</div>
-            </div>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <Badge signal={s.signal} />
-            <button
-              onClick={() => executeTrade(s.symbol, s.signal, s.pct)}
-              disabled={s.signal === "ATTENDRE"}
-              style={{
-                background: s.signal === "ATTENDRE" ? "#1e293b" : "#2563eb",
-                color: s.signal === "ATTENDRE" ? "#475569" : "white",
-                border: "none",
-                borderRadius: 6,
-                padding: "6px 10px",
-                fontSize: 11,
-                fontWeight: 700,
-                cursor: s.signal === "ATTENDRE" ? "default" : "pointer",
-              }}
-            >
-              Exécuter
-            </button>
-          </div>
+  return (
+    <div style={{ maxWidth: 800, margin: "0 auto", padding: 16, paddingBottom: 40 }}>
+      <div style={{ textAlign: "center", marginBottom: 16 }}>
+        <div style={{ fontSize: 20, fontWeight: 800, color: "#c9a84c" }}>HalalBot</div>
+        <div style={{ fontSize: 11, color: "#475569" }}>{state.last_update ? "Mis a jour: " + new Date(state.last_update).toLocaleString("fr-FR") : "Jamais mis a jour"}</div>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 8, marginBottom: 8 }}>
+        <Card label="Capital" value={capital.toFixed(0) + "€"} color="#60a5fa" />
+        <Card label="Total" value={totalValue.toFixed(0) + "€"} color="#c9a84c" />
+        <Card label="P&L" value={(pnl >= 0 ? "+" : "") + pnl + "€"} color={pnl >= 0 ? "#34d399" : "#f87171"} />
+        <Card label="Perf." value={(pct >= 0 ? "+" : "") + pct + "%"} color={pct >= 0 ? "#34d399" : "#f87171"} />
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 8, marginBottom: 14 }}>
+        <Card label="Trades" value={trades.length} color="#e2e8f0" />
+        <Card label="Win Rate" value={winRate + "%"} color="#e2e8f0" />
+        <Card label="Gain net" value={(totalGain >= 0 ? "+" : "") + totalGain + "€"} color={totalGain >= 0 ? "#34d399" : "#f87171"} />
+        <Card label="Positions" value={positions.length} color="#e2e8f0" />
+      </div>
+
+      <div style={{ display: "flex", gap: 6, marginBottom: 14 }}>
+        <button onClick={() => setTab("marches")} style={{ background: tab === "marches" ? "#1e3a5f" : "#0f172a", color: "#60a5fa", border: "1px solid #1e3a5f", borderRadius: 8, padding: "6px 12px", fontSize: 12 }}>Marches</button>
+        <button onClick={() => setTab("positions")} style={{ background: tab === "positions" ? "#1e3a5f" : "#0f172a", color: "#60a5fa", border: "1px solid #1e3a5f", borderRadius: 8, padding: "6px 12px", fontSize: 12 }}>Positions ({positions.length})</button>
+        <button onClick={() => setTab("historique")} style={{ background: tab === "historique" ? "#1e3a5f" : "#0f172a", color: "#60a5fa", border: "1px solid #1e3a5f", borderRadius: 8, padding: "6px 12px", fontSize: 12 }}>Historique ({trades.length})</button>
+      </div>
+
+      {tab === "marches" && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {Object.keys(INSTRUMENT_META).map(id => {
+            const sig = signals[id];
+            const meta = INSTRUMENT_META[id];
+            const isOpen = positions.find(p => p.symbol === id);
+            return (
+              <div key={id} style={{ background: "#0f172a", borderRadius: 12, padding: "14px 16px", border: "1px solid " + (isOpen ? "#166534" : "#1e3a5f"), display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <span style={{ fontSize: 24 }}>{meta.emoji}</span>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: 14 }}>{id}</div>
+                    <div style={{ fontSize: 10, color: "#475569" }}>{meta.type}</div>
+                  </div>
+                </div>
+                <div style={{ textAlign: "right", minWidth: 90 }}>
+                  <div style={{ fontWeight: 700, fontSize: 13 }}>{fmt(id, sig && sig.price)}</div>
+                  <div style={{ fontSize: 9, color: "#475569" }}>{(sig && sig.reason) || "En attente"}</div>
+                </div>
+                <Badge signal={(sig && sig.signal) || "ATTENDRE"} />
+              </div>
+            );
+          })}
         </div>
-      );
-    })}
-  </div>
+      )}
 
-  <div style={{ fontSize: 12, fontWeight: 700, color: "#64748b", marginBottom: 8, letterSpacing: 1 }}>
-    HISTORIQUE DES TRADES
-  </div>
-
-  {trades.length === 0 ? (
-    <div style={{ textAlign: "center", color: "#334155", fontSize: 12, padding: 24 }}>
-      Aucun trade exécuté pour le moment.
-    </div>
-  ) : (
-    <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 16 }}>
-      {trades.map((t) => (
-        <div
-          key={t.id}
-          style={{ background: "#0f172a", borderRadius: 8, padding: 10, display: "flex", alignItems: "center", justifyContent: "space-between" }}
-        >
-          <div>
-            <div style={{ fontSize: 12, fontWeight: 700 }}>
-              {INSTRUMENT_META[t.symbol].emoji} {t.symbol}
-            </div>
-            <div style={{ fontSize: 9, color: "#475569" }}>{t.time}</div>
-          </div>
-          <div style={{ textAlign: "right" }}>
-            <div style={{ fontSize: 13, fontWeight: 800, color: t.gain >= 0 ? "#34d399" : "#f87171" }}>
-              {t.gain >= 0 ? "+" : ""}{t.gain}€
-            </div>
-            <div
-              style={{
-                fontSize: 10,
-                background: t.result === "WIN" ? "#14532d" : "#7f1d1d",
-                color: t.result === "WIN" ? "#86efac" : "#fca5a5",
-                padding: "1px 6px",
-                borderRadius: 8,
-                display: "inline-block",
-              }}
-            >
-              {t.result} · {t.pct}%
-            </div>
-          </div>
+      {tab === "positions" && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {positions.length === 0 ? <div style={{ color: "#475569", textAlign: "center", padding: 24 }}>Aucune position ouverte</div> : positions.map((pos, i) => {
+            const cur = (signals[pos.symbol] && signals[pos.symbol].price) || pos.entry_price;
+            const pnlPos = +((cur - pos.entry_price) * pos.qty).toFixed(2);
+            return (
+              <div key={i} style={{ background: "#0f172a", borderRadius: 12, padding: 14, border: "1px solid " + (pnlPos >= 0 ? "#166534" : "#7f1d1d") }}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span>{INSTRUMENT_META[pos.symbol].emoji} {pos.name}</span>
+                  <span style={{ color: pnlPos >= 0 ? "#34d399" : "#f87171" }}>{pnlPos}€</span>
+                </div>
+              </div>
+            );
+          })}
         </div>
-      ))}
+      )}
+
+      {tab === "historique" && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          {trades.length === 0 ? <div style={{ color: "#475569", textAlign: "center", padding: 24 }}>Aucun trade cloture</div> : trades.slice().reverse().map((t, i) => (
+            <div key={i} style={{ background: "#0f172a", borderRadius: 10, padding: 12, border: "1px solid " + (t.result === "WIN" ? "#166534" : "#7f1d1d"), display: "flex", justifyContent: "space-between" }}>
+              <div>{INSTRUMENT_META[t.symbol].emoji} {t.name}</div>
+              <div style={{ color: t.gain >= 0 ? "#34d399" : "#f87171" }}>{t.gain}€</div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
-  )}
-
-  <div style={{ marginTop: 16, background: "#0f172a", borderRadius: 10, padding: 12, border: "1px solid #1e3a5f", textAlign: "center" }}>
-    <div style={{ fontSize: 10, color: "#475569" }}>🌙 Or · Bitcoin Spot · Actions directes · Zéro intérêts · Zéro levier · Zéro CFD</div>
-    <div style={{ fontSize: 10, color: "#334155", marginTop: 3 }}>Phase de test · Capital fictif 1 000€ · Aucun argent réel engagé</div>
-  </div>
-</div>
-```
-
-);
+  );
 }
 
-ReactDOM.createRoot(document.getElementById(“root”)).render(<App />);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 </script>
-
 </body>
 </html>
