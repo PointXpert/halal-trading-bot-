@@ -35,4 +35,5 @@ jobs:
           git config --local user.name "HalalBot"
           git add data/state.json
           git diff --quiet --cached || git commit -m "Mise a jour automatique des donnees"
-          git push
+          git pull --rebase origin main
+          git push origin main
