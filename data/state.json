@@ -6,44 +6,88 @@
     "XAUUSD": [],
     "BTC": [
       63903.0,
-      63872.0
+      63872.0,
+      62699.0
     ],
     "NVDA": [
       204.65,
-      204.65
+      204.65,
+      200.04
     ],
     "MSFT": [
       378.91,
-      378.91
+      378.91,
+      373.94
     ],
     "AAPL": [
       295.95,
-      295.95
+      295.95,
+      294.3
+    ],
+    "TSLA": [
+      381.61
+    ],
+    "AMZN": [
+      234.11
+    ],
+    "GOOGL": [
+      346.13
+    ],
+    "LLY": [
+      1107.08
+    ],
+    "ASML": [
+      1778.46
     ]
   },
   "signals": {
     "BTC": {
       "signal": "ATTENDRE",
       "reason": "Historique insuffisant",
-      "price": 63872.0
+      "price": 62699.0
     },
     "NVDA": {
       "signal": "ATTENDRE",
       "reason": "Historique insuffisant",
-      "price": 204.65
+      "price": 200.04
     },
     "MSFT": {
       "signal": "ATTENDRE",
       "reason": "Historique insuffisant",
-      "price": 378.91
+      "price": 373.94
     },
     "AAPL": {
       "signal": "ATTENDRE",
       "reason": "Historique insuffisant",
-      "price": 295.95
+      "price": 294.3
+    },
+    "TSLA": {
+      "signal": "ATTENDRE",
+      "reason": "Historique insuffisant",
+      "price": 381.61
+    },
+    "AMZN": {
+      "signal": "ATTENDRE",
+      "reason": "Historique insuffisant",
+      "price": 234.11
+    },
+    "GOOGL": {
+      "signal": "ATTENDRE",
+      "reason": "Historique insuffisant",
+      "price": 346.13
+    },
+    "LLY": {
+      "signal": "ATTENDRE",
+      "reason": "Historique insuffisant",
+      "price": 1107.08
+    },
+    "ASML": {
+      "signal": "ATTENDRE",
+      "reason": "Historique insuffisant",
+      "price": 1778.46
     }
   },
-  "last_update": "2026-06-18T13:47:35.447099+00:00",
+  "last_update": "2026-06-24T07:03:07.099670+00:00",
   "has_news_warning": false,
   "news_event": null
 }
