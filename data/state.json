@@ -12,7 +12,8 @@
       62424.0,
       61831.0,
       60417.0,
-      59430.0
+      59430.0,
+      60880.0
     ],
     "NVDA": [
       204.65,
@@ -22,7 +23,8 @@
       200.04,
       200.04,
       200.04,
-      200.04
+      200.04,
+      199.0
     ],
     "MSFT": [
       378.91,
@@ -32,7 +34,8 @@
       373.94,
       373.94,
       373.94,
-      373.94
+      373.94,
+      365.46
     ],
     "AAPL": [
       295.95,
@@ -42,7 +45,8 @@
       294.3,
       294.3,
       294.3,
-      294.3
+      294.3,
+      293.08
     ],
     "TSLA": [
       381.61,
@@ -50,7 +54,8 @@
       381.61,
       381.61,
       381.61,
-      381.61
+      381.61,
+      375.53
     ],
     "AMZN": [
       234.11,
@@ -58,7 +63,8 @@
       234.11,
       234.11,
       234.11,
-      234.11
+      234.11,
+      234.27
     ],
     "GOOGL": [
       346.13,
@@ -66,7 +72,8 @@
       346.13,
       346.13,
       346.13,
-      346.13
+      346.13,
+      345.29
     ],
     "LLY": [
       1107.08,
@@ -74,7 +81,8 @@
       1107.08,
       1107.08,
       1107.08,
-      1107.08
+      1107.08,
+      1117.0
     ],
     "ASML": [
       1778.46,
@@ -89,50 +97,45 @@
     "BTC": {
       "signal": "ATTENDRE",
       "reason": "Historique insuffisant",
-      "price": 59430.0
+      "price": 60880.0
     },
     "NVDA": {
       "signal": "ATTENDRE",
       "reason": "Historique insuffisant",
-      "price": 200.04
+      "price": 199.0
     },
     "MSFT": {
       "signal": "ATTENDRE",
       "reason": "Historique insuffisant",
-      "price": 373.94
+      "price": 365.46
     },
     "AAPL": {
       "signal": "ATTENDRE",
       "reason": "Historique insuffisant",
-      "price": 294.3
+      "price": 293.08
     },
     "TSLA": {
       "signal": "ATTENDRE",
       "reason": "Historique insuffisant",
-      "price": 381.61
+      "price": 375.53
     },
     "AMZN": {
       "signal": "ATTENDRE",
       "reason": "Historique insuffisant",
-      "price": 234.11
+      "price": 234.27
     },
     "GOOGL": {
       "signal": "ATTENDRE",
       "reason": "Historique insuffisant",
-      "price": 346.13
+      "price": 345.29
     },
     "LLY": {
       "signal": "ATTENDRE",
       "reason": "Historique insuffisant",
-      "price": 1107.08
-    },
-    "ASML": {
-      "signal": "ATTENDRE",
-      "reason": "Historique insuffisant",
-      "price": 1778.46
+      "price": 1117.0
     }
   },
-  "last_update": "2026-06-24T18:55:15.604028+00:00",
+  "last_update": "2026-06-24T20:51:24.599068+00:00",
   "has_news_warning": false,
   "news_event": null
 }
