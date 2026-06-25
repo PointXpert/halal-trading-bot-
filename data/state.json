@@ -1,5 +1,5 @@
 {
-  "capital": 845.08,
+  "capital": 718.32,
   "positions": [
     {
       "symbol": "LLY",
@@ -10,6 +10,16 @@
       "tp": 1145.19,
       "sl": 1103.85,
       "open_time": "2026-06-25T05:09:11.226887+00:00"
+    },
+    {
+      "symbol": "ASML",
+      "name": "ASML",
+      "entry_price": 1841.18,
+      "qty": 0.06884823862957451,
+      "amount": 126.762,
+      "tp": 1887.21,
+      "sl": 1819.09,
+      "open_time": "2026-06-25T21:01:07.514809+00:00"
     }
   ],
   "trades": [
@@ -42,7 +52,8 @@
       61612.0,
       61086.0,
       59233.0,
-      59546.0
+      59546.0,
+      59307.0
     ],
     "NVDA": [
       204.65,
@@ -60,7 +71,8 @@
       199.0,
       199.0,
       199.0,
-      199.0
+      199.0,
+      195.74
     ],
     "MSFT": [
       378.91,
@@ -78,7 +90,8 @@
       365.46,
       365.46,
       365.46,
-      365.46
+      365.46,
+      352.83
     ],
     "AAPL": [
       295.95,
@@ -96,7 +109,8 @@
       293.08,
       293.08,
       293.08,
-      293.08
+      293.08,
+      275.15
     ],
     "TSLA": [
       381.61,
@@ -112,7 +126,8 @@
       375.53,
       375.53,
       375.53,
-      375.53
+      375.53,
+      375.12
     ],
     "AMZN": [
       234.11,
@@ -128,7 +143,8 @@
       234.27,
       234.27,
       234.27,
-      234.27
+      234.27,
+      227.01
     ],
     "GOOGL": [
       346.13,
@@ -144,7 +160,8 @@
       345.29,
       345.29,
       345.29,
-      345.29
+      345.29,
+      343.71
     ],
     "LLY": [
       1107.08,
@@ -160,7 +177,8 @@
       1117.26,
       1117.26,
       1117.26,
-      1117.26
+      1117.26,
+      1130.27
     ],
     "ASML": [
       1778.46,
@@ -175,57 +193,58 @@
       1762.77,
       1762.77,
       1762.77,
-      1762.77
+      1762.77,
+      1841.18
     ]
   },
   "signals": {
     "BTC": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=27",
-      "price": 59546.0
+      "reason": "Pas de signal clair, RSI=26",
+      "price": 59307.0
     },
     "NVDA": {
       "signal": "ATTENDRE",
       "reason": "Pas de signal clair, RSI=0",
-      "price": 199.0
+      "price": 195.74
     },
     "MSFT": {
       "signal": "ATTENDRE",
       "reason": "Pas de signal clair, RSI=0",
-      "price": 365.46
+      "price": 352.83
     },
     "AAPL": {
       "signal": "ATTENDRE",
       "reason": "Pas de signal clair, RSI=0",
-      "price": 293.08
+      "price": 275.15
     },
     "TSLA": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=50",
-      "price": 375.53
+      "reason": "Pas de signal clair, RSI=0",
+      "price": 375.12
     },
     "AMZN": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=50",
-      "price": 234.27
+      "reason": "Pas de signal clair, RSI=2",
+      "price": 227.01
     },
     "GOOGL": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=50",
-      "price": 345.29
+      "reason": "Pas de signal clair, RSI=0",
+      "price": 343.71
     },
     "LLY": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=50",
-      "price": 1117.26
+      "signal": "ACHETER",
+      "reason": "Prix au-dessus MM10, RSI=0",
+      "price": 1130.27
     },
     "ASML": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=50",
-      "price": 1762.77
+      "signal": "ACHETER",
+      "reason": "Prix au-dessus MM10, RSI=50",
+      "price": 1841.18
     }
   },
-  "last_update": "2026-06-25T18:14:22.867664+00:00",
+  "last_update": "2026-06-25T21:01:07.514832+00:00",
   "has_news_warning": false,
   "news_event": null
 }
