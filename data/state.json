@@ -1,6 +1,16 @@
 {
-  "capital": 850.0,
+  "capital": 722.5,
   "positions": [
+    {
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "entry_price": 61612.0,
+      "qty": 0.002069402064532883,
+      "amount": 127.5,
+      "tp": 63152.3,
+      "sl": 60872.66,
+      "open_time": "2026-06-25T09:33:22.909285+00:00"
+    },
     {
       "symbol": "LLY",
       "name": "Eli Lilly",
@@ -27,7 +37,8 @@
       60880.0,
       60909.0,
       61000.0,
-      61425.0
+      61425.0,
+      61612.0
     ],
     "NVDA": [
       204.65,
@@ -38,6 +49,7 @@
       200.04,
       200.04,
       200.04,
+      199.0,
       199.0,
       199.0,
       199.0,
@@ -55,6 +67,7 @@
       365.46,
       365.46,
       365.46,
+      365.46,
       365.46
     ],
     "AAPL": [
@@ -66,6 +79,7 @@
       294.3,
       294.3,
       294.3,
+      293.08,
       293.08,
       293.08,
       293.08,
@@ -81,6 +95,7 @@
       375.53,
       375.53,
       375.53,
+      375.53,
       375.53
     ],
     "AMZN": [
@@ -90,6 +105,7 @@
       234.11,
       234.11,
       234.11,
+      234.27,
       234.27,
       234.27,
       234.27,
@@ -105,6 +121,7 @@
       345.29,
       345.29,
       345.29,
+      345.29,
       345.29
     ],
     "LLY": [
@@ -117,6 +134,7 @@
       1117.0,
       1117.0,
       1117.26,
+      1117.26,
       1117.26
     ],
     "ASML": [
@@ -128,14 +146,15 @@
       1778.46,
       1762.77,
       1762.77,
+      1762.77,
       1762.77
     ]
   },
   "signals": {
     "BTC": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=50",
-      "price": 61425.0
+      "signal": "ACHETER",
+      "reason": "Prix au-dessus MM10, RSI=50",
+      "price": 61612.0
     },
     "NVDA": {
       "signal": "ATTENDRE",
@@ -168,17 +187,17 @@
       "price": 345.29
     },
     "LLY": {
-      "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=50",
+      "signal": "ATTENDRE",
+      "reason": "Pas de signal clair, RSI=50",
       "price": 1117.26
     },
     "ASML": {
-      "signal": "ATTENDRE",
-      "reason": "Historique insuffisant",
+      "signal": "VENDRE",
+      "reason": "Prix sous MM10, RSI=50",
       "price": 1762.77
     }
   },
-  "last_update": "2026-06-25T05:09:11.226916+00:00",
+  "last_update": "2026-06-25T09:33:22.909383+00:00",
   "has_news_warning": false,
   "news_event": null
 }
