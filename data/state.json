@@ -1,16 +1,6 @@
 {
-  "capital": 722.5,
+  "capital": 845.08,
   "positions": [
-    {
-      "symbol": "BTC",
-      "name": "Bitcoin",
-      "entry_price": 61612.0,
-      "qty": 0.002069402064532883,
-      "amount": 127.5,
-      "tp": 63152.3,
-      "sl": 60872.66,
-      "open_time": "2026-06-25T09:33:22.909285+00:00"
-    },
     {
       "symbol": "LLY",
       "name": "Eli Lilly",
@@ -22,7 +12,18 @@
       "open_time": "2026-06-25T05:09:11.226887+00:00"
     }
   ],
-  "trades": [],
+  "trades": [
+    {
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "entry_price": 61612.0,
+      "exit_price": 59233.0,
+      "gain": -4.92,
+      "pct": -3.86,
+      "time": "2026-06-25T15:42:58.632146+00:00",
+      "result": "LOSS"
+    }
+  ],
   "price_history": {
     "XAUUSD": [],
     "BTC": [
@@ -39,7 +40,8 @@
       61000.0,
       61425.0,
       61612.0,
-      61086.0
+      61086.0,
+      59233.0
     ],
     "NVDA": [
       204.65,
@@ -50,6 +52,7 @@
       200.04,
       200.04,
       200.04,
+      199.0,
       199.0,
       199.0,
       199.0,
@@ -71,6 +74,7 @@
       365.46,
       365.46,
       365.46,
+      365.46,
       365.46
     ],
     "AAPL": [
@@ -82,6 +86,7 @@
       294.3,
       294.3,
       294.3,
+      293.08,
       293.08,
       293.08,
       293.08,
@@ -101,6 +106,7 @@
       375.53,
       375.53,
       375.53,
+      375.53,
       375.53
     ],
     "AMZN": [
@@ -110,6 +116,7 @@
       234.11,
       234.11,
       234.11,
+      234.27,
       234.27,
       234.27,
       234.27,
@@ -129,6 +136,7 @@
       345.29,
       345.29,
       345.29,
+      345.29,
       345.29
     ],
     "LLY": [
@@ -140,6 +148,7 @@
       1107.08,
       1117.0,
       1117.0,
+      1117.26,
       1117.26,
       1117.26,
       1117.26,
@@ -156,33 +165,34 @@
       1762.77,
       1762.77,
       1762.77,
+      1762.77,
       1762.77
     ]
   },
   "signals": {
     "BTC": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=50",
-      "price": 61086.0
+      "reason": "Pas de signal clair, RSI=24",
+      "price": 59233.0
     },
     "NVDA": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=50",
+      "reason": "Pas de signal clair, RSI=0",
       "price": 199.0
     },
     "MSFT": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=50",
+      "signal": "ATTENDRE",
+      "reason": "Pas de signal clair, RSI=0",
       "price": 365.46
     },
     "AAPL": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=50",
+      "reason": "Pas de signal clair, RSI=0",
       "price": 293.08
     },
     "TSLA": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=50",
+      "signal": "ATTENDRE",
+      "reason": "Pas de signal clair, RSI=50",
       "price": 375.53
     },
     "AMZN": {
@@ -206,7 +216,7 @@
       "price": 1762.77
     }
   },
-  "last_update": "2026-06-25T12:25:27.977225+00:00",
+  "last_update": "2026-06-25T15:42:58.632265+00:00",
   "has_news_warning": false,
   "news_event": null
 }
