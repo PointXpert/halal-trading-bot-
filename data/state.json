@@ -2,16 +2,6 @@
   "capital": 511.17,
   "positions": [
     {
-      "symbol": "BTC",
-      "name": "Bitcoin",
-      "entry_price": 60171.0,
-      "qty": 0.0009496185870269731,
-      "amount": 57.1395,
-      "tp": 61675.27,
-      "sl": 59448.95,
-      "open_time": "2026-07-01T15:47:17.516547+00:00"
-    },
-    {
       "symbol": "MSFT",
       "name": "Microsoft",
       "entry_price": 384.28,
@@ -60,6 +50,16 @@
       "tp": 362.49,
       "sl": 349.41,
       "open_time": "2026-06-29T22:12:13.323493+00:00"
+    },
+    {
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "entry_price": 60171.0,
+      "qty": 0.0009496185870269731,
+      "amount": 57.1395,
+      "tp": 61675.27,
+      "sl": 59448.95,
+      "open_time": "2026-07-01T15:47:17.516547+00:00"
     }
   ],
   "trades": [
@@ -207,7 +207,6 @@
   "price_history": {
     "XAUUSD": [],
     "BTC": [
-      59340.0,
       59999.0,
       59962.0,
       59801.0,
@@ -256,7 +255,8 @@
       60755.0,
       59891.0,
       60729.0,
-      60372.0
+      60372.0,
+      61240.0
     ],
     "NVDA": [
       195.74,
@@ -678,51 +678,11 @@
   "signals": {
     "BTC": {
       "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=61",
-      "price": 60372.0
-    },
-    "NVDA": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=75",
-      "price": 197.58
-    },
-    "MSFT": {
-      "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=0",
-      "price": 384.28
-    },
-    "AAPL": {
-      "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=0",
-      "price": 294.38
-    },
-    "TSLA": {
-      "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=0",
-      "price": 425.3
-    },
-    "AMZN": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=90",
-      "price": 241.7
-    },
-    "GOOGL": {
-      "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=0",
-      "price": 361.21
-    },
-    "LLY": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=73",
-      "price": 1191.74
-    },
-    "ASML": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=57",
-      "price": 1843.04
+      "reason": "Prix au-dessus MM10, RSI=63",
+      "price": 61240.0
     }
   },
-  "last_update": "2026-07-02T09:19:21.727526+00:00",
+  "last_update": "2026-07-02T12:12:08.412348+00:00",
   "has_news_warning": false,
   "news_event": null
 }
