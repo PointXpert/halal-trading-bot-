@@ -1,6 +1,16 @@
 {
-  "capital": 495.94,
+  "capital": 581.6,
   "positions": [
+    {
+      "symbol": "NVDA",
+      "name": "Nvidia",
+      "entry_price": 196.93,
+      "qty": 0.37775351647793626,
+      "amount": 74.39099999999999,
+      "tp": 201.85,
+      "sl": 194.57,
+      "open_time": "2026-07-07T21:39:08.212121+00:00"
+    },
     {
       "symbol": "MSFT",
       "name": "Microsoft",
@@ -22,16 +32,6 @@
       "open_time": "2026-07-02T23:12:45.835005+00:00"
     },
     {
-      "symbol": "TSLA",
-      "name": "Tesla",
-      "entry_price": 419.77,
-      "qty": 0.2009207423112657,
-      "amount": 84.34049999999999,
-      "tp": 430.26,
-      "sl": 414.73,
-      "open_time": "2026-07-06T20:57:45.634578+00:00"
-    },
-    {
       "symbol": "AMZN",
       "name": "Amazon",
       "entry_price": 240.14,
@@ -50,16 +50,6 @@
       "tp": 375.62,
       "sl": 362.06,
       "open_time": "2026-07-06T22:20:32.093382+00:00"
-    },
-    {
-      "symbol": "ASML",
-      "name": "ASML",
-      "entry_price": 1825.07,
-      "qty": 0.04526949651246253,
-      "amount": 82.61999999999999,
-      "tp": 1870.7,
-      "sl": 1803.17,
-      "open_time": "2026-07-06T20:57:45.634666+00:00"
     }
   ],
   "trades": [
@@ -262,12 +252,31 @@
       "pct": -1.24,
       "time": "2026-07-07T14:44:29.955457+00:00",
       "result": "LOSS"
+    },
+    {
+      "symbol": "TSLA",
+      "name": "Tesla",
+      "entry_price": 419.77,
+      "exit_price": 402.9,
+      "gain": -3.39,
+      "pct": -4.02,
+      "time": "2026-07-07T21:39:08.212209+00:00",
+      "result": "LOSS"
+    },
+    {
+      "symbol": "ASML",
+      "name": "ASML",
+      "entry_price": 1825.07,
+      "exit_price": 1747.28,
+      "gain": -3.52,
+      "pct": -4.26,
+      "time": "2026-07-07T21:39:08.212295+00:00",
+      "result": "LOSS"
     }
   ],
   "price_history": {
     "XAUUSD": [],
     "BTC": [
-      60372.0,
       61240.0,
       61543.0,
       61619.0,
@@ -316,14 +325,14 @@
       63334.0,
       62863.0,
       63854.0,
-      63762.0
+      63762.0,
+      63408.0
     ],
     "NVDA": [
       197.58,
       197.58,
       197.58,
       197.58,
-      197.58,
       194.83,
       194.83,
       194.83,
@@ -368,14 +377,14 @@
       195.55,
       195.55,
       195.55,
-      195.55
+      195.55,
+      196.93
     ],
     "MSFT": [
       384.28,
       384.28,
       384.28,
       384.28,
-      384.28,
       390.49,
       390.49,
       390.49,
@@ -420,14 +429,14 @@
       386.74,
       386.74,
       386.74,
-      386.74
+      386.74,
+      388.84
     ],
     "AAPL": [
       294.38,
       294.38,
       294.38,
       294.38,
-      294.38,
       308.63,
       308.63,
       308.63,
@@ -472,14 +481,14 @@
       312.66,
       312.66,
       312.66,
-      312.66
+      312.66,
+      310.66
     ],
     "TSLA": [
       425.3,
       425.3,
       425.3,
       425.3,
-      425.3,
       393.45,
       393.45,
       393.45,
@@ -524,14 +533,14 @@
       419.77,
       419.77,
       419.77,
-      419.77
+      419.77,
+      402.9
     ],
     "AMZN": [
       241.7,
       241.7,
       241.7,
       241.7,
-      241.7,
       242.67,
       242.67,
       242.67,
@@ -576,14 +585,14 @@
       244.16,
       244.16,
       244.16,
-      244.16
+      244.16,
+      245.98
     ],
     "GOOGL": [
       361.21,
       361.21,
       361.21,
       361.21,
-      361.21,
       359.91,
       359.91,
       359.91,
@@ -628,10 +637,10 @@
       366.46,
       366.46,
       366.46,
-      366.46
+      366.46,
+      367.03
     ],
     "LLY": [
-      1191.74,
       1191.74,
       1191.74,
       1191.74,
@@ -680,14 +689,14 @@
       1200.06,
       1200.06,
       1200.06,
-      1200.06
+      1200.06,
+      1235.65
     ],
     "ASML": [
       1843.04,
       1843.04,
       1843.04,
       1843.04,
-      1843.04,
       1769.32,
       1769.32,
       1769.32,
@@ -732,57 +741,58 @@
       1825.07,
       1825.07,
       1825.07,
-      1825.07
+      1825.07,
+      1747.28
     ]
   },
   "signals": {
     "BTC": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=54",
-      "price": 63762.0
+      "reason": "Pas de signal clair, RSI=52",
+      "price": 63408.0
     },
     "NVDA": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
-      "price": 195.55
+      "signal": "ACHETER",
+      "reason": "Prix au-dessus MM10, RSI=0",
+      "price": 196.93
     },
     "MSFT": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=62",
-      "price": 386.74
+      "reason": "Pas de signal clair, RSI=69",
+      "price": 388.84
     },
     "AAPL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
-      "price": 312.66
+      "signal": "VENDRE",
+      "reason": "Prix sous MM10, RSI=90",
+      "price": 310.66
     },
     "TSLA": {
-      "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=0",
-      "price": 419.77
+      "signal": "VENDRE",
+      "reason": "Prix sous MM10, RSI=61",
+      "price": 402.9
     },
     "AMZN": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
-      "price": 244.16
+      "signal": "ACHETER",
+      "reason": "Prix au-dessus MM10, RSI=0",
+      "price": 245.98
     },
     "GOOGL": {
       "signal": "ATTENDRE",
       "reason": "Pas de signal clair, RSI=0",
-      "price": 366.46
+      "price": 367.03
     },
     "LLY": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=62",
-      "price": 1200.06
+      "reason": "Pas de signal clair, RSI=81",
+      "price": 1235.65
     },
     "ASML": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
-      "price": 1825.07
+      "signal": "VENDRE",
+      "reason": "Prix sous MM10, RSI=42",
+      "price": 1747.28
     }
   },
-  "last_update": "2026-07-07T20:01:35.892982+00:00",
+  "last_update": "2026-07-07T21:39:08.212306+00:00",
   "has_news_warning": false,
   "news_event": null
 }
