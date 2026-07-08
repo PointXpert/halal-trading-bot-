@@ -2,26 +2,6 @@
   "capital": 581.6,
   "positions": [
     {
-      "symbol": "NVDA",
-      "name": "Nvidia",
-      "entry_price": 196.93,
-      "qty": 0.37775351647793626,
-      "amount": 74.39099999999999,
-      "tp": 201.85,
-      "sl": 194.57,
-      "open_time": "2026-07-07T21:39:08.212121+00:00"
-    },
-    {
-      "symbol": "MSFT",
-      "name": "Microsoft",
-      "entry_price": 384.28,
-      "qty": 0.3249076194441553,
-      "amount": 124.85549999999999,
-      "tp": 393.89,
-      "sl": 379.67,
-      "open_time": "2026-07-02T00:13:11.988023+00:00"
-    },
-    {
       "symbol": "AAPL",
       "name": "Apple",
       "entry_price": 308.63,
@@ -50,6 +30,26 @@
       "tp": 375.62,
       "sl": 362.06,
       "open_time": "2026-07-06T22:20:32.093382+00:00"
+    },
+    {
+      "symbol": "NVDA",
+      "name": "Nvidia",
+      "entry_price": 196.93,
+      "qty": 0.37775351647793626,
+      "amount": 74.39099999999999,
+      "tp": 201.85,
+      "sl": 194.57,
+      "open_time": "2026-07-07T21:39:08.212121+00:00"
+    },
+    {
+      "symbol": "MSFT",
+      "name": "Microsoft",
+      "entry_price": 384.28,
+      "qty": 0.3249076194441553,
+      "amount": 124.85549999999999,
+      "tp": 393.89,
+      "sl": 379.67,
+      "open_time": "2026-07-02T00:13:11.988023+00:00"
     }
   ],
   "trades": [
@@ -277,7 +277,6 @@
   "price_history": {
     "XAUUSD": [],
     "BTC": [
-      61672.0,
       61714.0,
       61903.0,
       62077.0,
@@ -326,7 +325,8 @@
       61885.0,
       62110.0,
       61848.0,
-      61855.0
+      61855.0,
+      62262.0
     ],
     "NVDA": [
       194.83,
@@ -361,7 +361,6 @@
       194.83,
       194.83,
       194.83,
-      194.83,
       195.55,
       195.55,
       195.55,
@@ -371,6 +370,7 @@
       195.55,
       195.55,
       195.55,
+      196.93,
       196.93,
       196.93,
       196.93,
@@ -413,7 +413,6 @@
       390.49,
       390.49,
       390.49,
-      390.49,
       386.74,
       386.74,
       386.74,
@@ -423,6 +422,7 @@
       386.74,
       386.74,
       386.74,
+      388.84,
       388.84,
       388.84,
       388.84,
@@ -748,8 +748,8 @@
   "signals": {
     "BTC": {
       "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=47",
-      "price": 61855.0
+      "reason": "Prix sous MM10, RSI=48",
+      "price": 62262.0
     },
     "NVDA": {
       "signal": "ATTENDRE",
@@ -760,39 +760,9 @@
       "signal": "ATTENDRE",
       "reason": "Pas de signal clair, RSI=0",
       "price": 388.84
-    },
-    "AAPL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=67",
-      "price": 310.66
-    },
-    "TSLA": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=61",
-      "price": 402.9
-    },
-    "AMZN": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
-      "price": 245.98
-    },
-    "GOOGL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
-      "price": 367.03
-    },
-    "LLY": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=93",
-      "price": 1235.56
-    },
-    "ASML": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=42",
-      "price": 1747.28
     }
   },
-  "last_update": "2026-07-08T16:43:50.489048+00:00",
+  "last_update": "2026-07-08T18:22:11.748327+00:00",
   "has_news_warning": false,
   "news_event": null
 }
