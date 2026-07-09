@@ -1,5 +1,5 @@
 {
-  "capital": 447.13,
+  "capital": 499.4,
   "positions": [
     {
       "symbol": "BTC",
@@ -40,16 +40,6 @@
       "tp": 316.35,
       "sl": 304.93,
       "open_time": "2026-07-02T23:12:45.835005+00:00"
-    },
-    {
-      "symbol": "AMZN",
-      "name": "Amazon",
-      "entry_price": 240.14,
-      "qty": 0.21157033397184974,
-      "amount": 50.80649999999999,
-      "tp": 246.14,
-      "sl": 237.26,
-      "open_time": "2026-06-30T00:09:13.422171+00:00"
     },
     {
       "symbol": "ASML",
@@ -302,12 +292,21 @@
       "pct": -1.24,
       "time": "2026-07-08T20:24:54.988038+00:00",
       "result": "LOSS"
+    },
+    {
+      "symbol": "AMZN",
+      "name": "Amazon",
+      "entry_price": 240.14,
+      "exit_price": 247.04,
+      "gain": 1.46,
+      "pct": 2.87,
+      "time": "2026-07-09T20:50:58.373893+00:00",
+      "result": "WIN"
     }
   ],
   "price_history": {
     "XAUUSD": [],
     "BTC": [
-      62501.0,
       62417.0,
       62420.0,
       62458.0,
@@ -356,7 +355,8 @@
       62311.0,
       62632.0,
       62818.0,
-      63126.0
+      63126.0,
+      63265.0
     ],
     "NVDA": [
       194.83,
@@ -383,7 +383,6 @@
       194.83,
       194.83,
       194.83,
-      194.83,
       195.55,
       195.55,
       195.55,
@@ -408,7 +407,8 @@
       204.12,
       204.12,
       204.12,
-      204.12
+      204.12,
+      202.78
     ],
     "MSFT": [
       390.49,
@@ -435,7 +435,6 @@
       390.49,
       390.49,
       390.49,
-      390.49,
       386.74,
       386.74,
       386.74,
@@ -460,7 +459,8 @@
       383.34,
       383.34,
       383.34,
-      383.34
+      383.34,
+      384.36
     ],
     "AAPL": [
       308.63,
@@ -488,7 +488,6 @@
       308.63,
       308.63,
       308.63,
-      308.63,
       312.66,
       312.66,
       312.66,
@@ -512,7 +511,8 @@
       313.39,
       313.39,
       313.39,
-      313.39
+      313.39,
+      316.22
     ],
     "TSLA": [
       393.45,
@@ -540,7 +540,6 @@
       393.45,
       393.45,
       393.45,
-      393.45,
       419.77,
       419.77,
       419.77,
@@ -564,7 +563,8 @@
       394.06,
       394.06,
       394.06,
-      394.06
+      394.06,
+      406.55
     ],
     "AMZN": [
       242.67,
@@ -592,7 +592,6 @@
       242.67,
       242.67,
       242.67,
-      242.67,
       244.16,
       244.16,
       244.16,
@@ -616,7 +615,8 @@
       243.62,
       243.62,
       243.62,
-      243.62
+      243.62,
+      247.04
     ],
     "GOOGL": [
       359.91,
@@ -644,7 +644,6 @@
       359.91,
       359.91,
       359.91,
-      359.91,
       366.46,
       366.46,
       366.46,
@@ -668,10 +667,10 @@
       361.92,
       361.92,
       361.92,
-      361.92
+      361.92,
+      358.89
     ],
     "LLY": [
-      1213.91,
       1213.91,
       1213.91,
       1213.91,
@@ -720,7 +719,8 @@
       1215.83,
       1215.83,
       1215.83,
-      1215.83
+      1215.83,
+      1216.47
     ],
     "ASML": [
       1769.32,
@@ -748,7 +748,6 @@
       1769.32,
       1769.32,
       1769.32,
-      1769.32,
       1825.07,
       1825.07,
       1825.07,
@@ -772,57 +771,58 @@
       1768.65,
       1768.65,
       1768.65,
-      1768.65
+      1768.65,
+      1804.25
     ]
   },
   "signals": {
     "BTC": {
       "signal": "ACHETER",
       "reason": "Prix au-dessus MM10, RSI=37",
-      "price": 63126.0
+      "price": 63265.0
     },
     "NVDA": {
-      "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=0",
-      "price": 204.12
+      "signal": "ATTENDRE",
+      "reason": "Pas de signal clair, RSI=87",
+      "price": 202.78
     },
     "MSFT": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=28",
-      "price": 383.34
+      "reason": "Pas de signal clair, RSI=36",
+      "price": 384.36
     },
     "AAPL": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=77",
-      "price": 313.39
+      "reason": "Pas de signal clair, RSI=83",
+      "price": 316.22
     },
     "TSLA": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=75",
-      "price": 394.06
+      "signal": "ATTENDRE",
+      "reason": "Pas de signal clair, RSI=81",
+      "price": 406.55
     },
     "AMZN": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=58",
-      "price": 243.62
+      "reason": "Pas de signal clair, RSI=74",
+      "price": 247.04
     },
     "GOOGL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=58",
-      "price": 361.92
+      "signal": "VENDRE",
+      "reason": "Prix sous MM10, RSI=47",
+      "price": 358.89
     },
     "LLY": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=64",
-      "price": 1215.83
+      "reason": "Pas de signal clair, RSI=65",
+      "price": 1216.47
     },
     "ASML": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=50",
-      "price": 1768.65
+      "signal": "ACHETER",
+      "reason": "Prix au-dessus MM10, RSI=59",
+      "price": 1804.25
     }
   },
-  "last_update": "2026-07-09T18:07:31.963153+00:00",
+  "last_update": "2026-07-09T20:50:58.373971+00:00",
   "has_news_warning": false,
   "news_event": null
 }
