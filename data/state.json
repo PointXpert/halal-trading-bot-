@@ -12,16 +12,6 @@
       "open_time": "2026-07-14T20:16:41.242450+00:00"
     },
     {
-      "symbol": "BTC",
-      "name": "Bitcoin",
-      "entry_price": 64544.0,
-      "qty": 0.001532164105106594,
-      "amount": 98.892,
-      "tp": 66157.6,
-      "sl": 63769.47,
-      "open_time": "2026-07-14T18:08:29.171658+00:00"
-    },
-    {
       "symbol": "MSFT",
       "name": "Microsoft",
       "entry_price": 384.28,
@@ -60,6 +50,16 @@
       "tp": 1820.03,
       "sl": 1754.33,
       "open_time": "2026-07-14T20:16:41.242500+00:00"
+    },
+    {
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "entry_price": 64544.0,
+      "qty": 0.001532164105106594,
+      "amount": 98.892,
+      "tp": 66157.6,
+      "sl": 63769.47,
+      "open_time": "2026-07-14T18:08:29.171658+00:00"
     }
   ],
   "trades": [
@@ -377,7 +377,6 @@
   "price_history": {
     "XAUUSD": [],
     "BTC": [
-      63869.0,
       63754.0,
       63953.0,
       64114.0,
@@ -426,7 +425,8 @@
       64447.0,
       64623.0,
       64973.0,
-      64487.0
+      64487.0,
+      64649.0
     ],
     "NVDA": [
       202.78,
@@ -849,45 +849,10 @@
     "BTC": {
       "signal": "ACHETER",
       "reason": "Prix au-dessus MM10, RSI=54",
-      "price": 64487.0
-    },
-    "NVDA": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=77",
-      "price": 211.8
-    },
-    "MSFT": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=52",
-      "price": 384.93
-    },
-    "AAPL": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=45",
-      "price": 314.86
-    },
-    "TSLA": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=17",
-      "price": 396.18
-    },
-    "AMZN": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
-      "price": 247.49
-    },
-    "LLY": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=2",
-      "price": 1152.54
-    },
-    "ASML": {
-      "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=41",
-      "price": 1775.64
+      "price": 64649.0
     }
   },
-  "last_update": "2026-07-15T02:44:05.448005+00:00",
+  "last_update": "2026-07-15T05:36:50.726393+00:00",
   "has_news_warning": false,
   "news_event": null
 }
