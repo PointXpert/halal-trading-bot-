@@ -2,16 +2,6 @@
   "capital": 653.11,
   "positions": [
     {
-      "symbol": "BTC",
-      "name": "Bitcoin",
-      "entry_price": 63993.0,
-      "qty": 0.0016071445314331254,
-      "amount": 102.84599999999999,
-      "tp": 65592.82,
-      "sl": 63225.08,
-      "open_time": "2026-07-17T18:09:14.849373+00:00"
-    },
-    {
       "symbol": "MSFT",
       "name": "Microsoft",
       "entry_price": 395.63,
@@ -40,6 +30,16 @@
       "tp": 1199.22,
       "sl": 1155.93,
       "open_time": "2026-07-16T21:05:05.223528+00:00"
+    },
+    {
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "entry_price": 63993.0,
+      "qty": 0.0016071445314331254,
+      "amount": 102.84599999999999,
+      "tp": 65592.82,
+      "sl": 63225.08,
+      "open_time": "2026-07-17T18:09:14.849373+00:00"
     }
   ],
   "trades": [
@@ -447,7 +447,6 @@
   "price_history": {
     "XAUUSD": [],
     "BTC": [
-      64689.0,
       64544.0,
       64447.0,
       64623.0,
@@ -496,7 +495,8 @@
       64480.0,
       64541.0,
       64694.0,
-      64750.0
+      64750.0,
+      64771.0
     ],
     "NVDA": [
       203.53,
@@ -918,51 +918,11 @@
   "signals": {
     "BTC": {
       "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=42",
-      "price": 64750.0
-    },
-    "NVDA": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
-      "price": 202.81
-    },
-    "MSFT": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
-      "price": 393.82
-    },
-    "AAPL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
-      "price": 333.74
-    },
-    "TSLA": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
-      "price": 380.84
-    },
-    "AMZN": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
-      "price": 247.23
-    },
-    "GOOGL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
-      "price": 346.77
-    },
-    "LLY": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
-      "price": 1179.11
-    },
-    "ASML": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
-      "price": 1747.58
+      "reason": "Prix au-dessus MM10, RSI=43",
+      "price": 64771.0
     }
   },
-  "last_update": "2026-07-18T22:55:22.840794+00:00",
+  "last_update": "2026-07-18T23:58:10.462317+00:00",
   "has_news_warning": false,
   "news_event": null
 }
