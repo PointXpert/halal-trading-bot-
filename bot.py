@@ -104,35 +104,36 @@ def get_stock_price(symbol):
         return None
 
 
-def get_forex_factory_news():
-    """Verifie les news a fort impact via le flux RSS Forex Factory"""
+def get_high_impact_news():
     HIGH_IMPACT_KEYWORDS = [
         "interest rate", "nonfarm", "non-farm", "CPI", "GDP", "unemployment",
         "federal reserve", "fed", "ECB", "BOE", "inflation", "FOMC",
-        "taux directeur", "chomage", "banque centrale"
+        "rate decision", "central bank", "war", "iran", "strike", "conflict",
+        "taux directeur", "chomage", "banque centrale", "guerre"
     ]
-    try:
-        r = requests.get(
-            "https://www.forexfactory.com/ff_calendar_thisweek.xml",
-            timeout=10,
-            headers={"User-Agent": "Mozilla/5.0"}
-        )
-        if r.status_code != 200:
-            print(f"Forex Factory RSS non disponible: {r.status_code}")
-            return False, None
-
-        root = ET.fromstring(r.content)
-        for item in root.findall(".//event"):
-            impact = item.findtext("impact", "").lower()
-            title = item.findtext("title", "").lower()
-            if impact in ["high", "red"]:
+    sources = [
+        "https://nfs.faireconomy.media/ff_calendar_thisweek.xml",
+        "https://www.investing.com/rss/news_25.rss",
+    ]
+    for url in sources:
+        try:
+            r = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+            if r.status_code != 200:
+                print(f"Source non disponible: {r.status_code}")
+                continue
+            root = ET.fromstring(r.content)
+            items = root.findall(".//item") or root.findall(".//event")
+            for item in items:
+                title = (item.findtext("title") or "").lower()
                 for kw in HIGH_IMPACT_KEYWORDS:
                     if kw.lower() in title:
+                        print(f"News detectee: {item.findtext('title')}")
                         return True, item.findtext("title", "News importante")
-        return False, None
-    except Exception as e:
-        print(f"Erreur Forex Factory: {e}")
-        return False, None
+        except Exception as e:
+            print(f"Erreur source {url}: {e}")
+            continue
+    return False, None
+
 
 
 def fetch_all_prices():
