@@ -447,7 +447,6 @@
   "price_history": {
     "XAUUSD": [],
     "BTC": [
-      64119.0,
       64113.0,
       64456.0,
       64122.0,
@@ -496,7 +495,8 @@
       64713.0,
       64207.0,
       64804.0,
-      64362.0
+      64362.0,
+      65422.0
     ],
     "NVDA": [
       212.5,
@@ -504,7 +504,6 @@
       212.5,
       212.5,
       212.5,
-      212.5,
       207.4,
       207.4,
       207.4,
@@ -516,6 +515,7 @@
       207.4,
       207.4,
       207.4,
+      202.81,
       202.81,
       202.81,
       202.81,
@@ -556,7 +556,6 @@
       395.63,
       395.63,
       395.63,
-      395.63,
       401.1,
       401.1,
       401.1,
@@ -568,6 +567,7 @@
       401.1,
       401.1,
       401.1,
+      393.82,
       393.82,
       393.82,
       393.82,
@@ -608,7 +608,6 @@
       327.5,
       327.5,
       327.5,
-      327.5,
       333.26,
       333.26,
       333.26,
@@ -620,6 +619,7 @@
       333.26,
       333.26,
       333.26,
+      333.74,
       333.74,
       333.74,
       333.74,
@@ -660,7 +660,6 @@
       394.46,
       394.46,
       394.46,
-      394.46,
       391.06,
       391.06,
       391.06,
@@ -672,6 +671,7 @@
       391.06,
       391.06,
       391.06,
+      380.84,
       380.84,
       380.84,
       380.84,
@@ -712,7 +712,6 @@
       254.96,
       254.96,
       254.96,
-      254.96,
       249.89,
       249.89,
       249.89,
@@ -724,6 +723,7 @@
       249.89,
       249.89,
       249.89,
+      247.23,
       247.23,
       247.23,
       247.23,
@@ -764,7 +764,6 @@
       370.92,
       370.92,
       370.92,
-      370.92,
       354.46,
       354.46,
       354.46,
@@ -776,6 +775,7 @@
       354.46,
       354.46,
       354.46,
+      346.77,
       346.77,
       346.77,
       346.77,
@@ -811,7 +811,6 @@
       346.77
     ],
     "LLY": [
-      1156.63,
       1156.63,
       1156.63,
       1156.63,
@@ -860,6 +859,7 @@
       1179.11,
       1179.11,
       1179.11,
+      1179.11,
       1179.11
     ],
     "ASML": [
@@ -868,7 +868,6 @@
       1815.27,
       1815.27,
       1815.27,
-      1815.27,
       1784.87,
       1784.87,
       1784.87,
@@ -880,6 +879,7 @@
       1784.87,
       1784.87,
       1784.87,
+      1747.58,
       1747.58,
       1747.58,
       1747.58,
@@ -917,52 +917,52 @@
   },
   "signals": {
     "BTC": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=54",
-      "price": 64362.0
+      "signal": "ACHETER",
+      "reason": "Prix au-dessus MM10, RSI=62.4",
+      "price": 65422.0
     },
     "NVDA": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 202.81
     },
     "MSFT": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
+      "reason": "Pas de signal clair, RSI=100.0",
       "price": 393.82
     },
     "AAPL": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
+      "reason": "Pas de signal clair, RSI=100.0",
       "price": 333.74
     },
     "TSLA": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 380.84
     },
     "AMZN": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 247.23
     },
     "GOOGL": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 346.77
     },
     "LLY": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
+      "reason": "Pas de signal clair, RSI=100.0",
       "price": 1179.11
     },
     "ASML": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 1747.58
     }
   },
-  "last_update": "2026-07-20T14:13:30.943235+00:00",
-  "has_news_warning": false,
-  "news_event": null
+  "last_update": "2026-07-20T16:42:09.899803+00:00",
+  "has_news_warning": true,
+  "news_event": "CPI m/m"
 }
