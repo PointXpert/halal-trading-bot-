@@ -150,7 +150,6 @@ def fetch_all_prices():
 
 
 def calculate_rsi(history, period=14):
-    """Calcul RSI corrige - retourne None si historique insuffisant"""
     if len(history) < period + 1:
         return None
     gains, losses = [], []
@@ -162,11 +161,12 @@ def calculate_rsi(history, period=14):
             losses.append(abs(diff))
     if not gains and not losses:
         return None
-        avg_gain = sum(gains[-period:]) / period if gains else 0.0001
+    avg_gain = sum(gains[-period:]) / period if gains else 0.0001
     avg_loss = sum(losses[-period:]) / period if losses else 0.0001
     rs = avg_gain / avg_loss
     rsi = 100 - (100 / (1 + rs))
     return round(rsi, 1)
+
 
 
 def analyze_signal(symbol, current_price, history):
