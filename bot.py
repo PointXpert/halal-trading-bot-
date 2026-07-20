@@ -1,11 +1,13 @@
 """
 HalalBot - Bot de paper trading avec vraies donnees de marche
 100% halal - Sans interets, sans levier, sans CFD
+Cycle toutes les 4h - Forex Factory RSS - RSI corrige
 """
 import os
 import json
 import time
 import requests
+import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 
 ALPHA_VANTAGE_KEY = os.environ.get("ALPHA_VANTAGE_KEY", "")
@@ -14,19 +16,21 @@ FINNHUB_KEY = os.environ.get("FINNHUB_KEY", "")
 DATA_FILE = "data/state.json"
 
 INSTRUMENTS = {
-    "XAUUSD": {"name": "Or / Gold", "type": "commodity", "symbol": "XAU"},
-    "BTC": {"name": "Bitcoin", "type": "crypto", "symbol": "bitcoin"},
-    "NVDA": {"name": "Nvidia", "type": "stock", "symbol": "NVDA"},
-    "MSFT": {"name": "Microsoft", "type": "stock", "symbol": "MSFT"},
-    "AAPL": {"name": "Apple", "type": "stock", "symbol": "AAPL"},
-    "TSLA": {"name": "Tesla", "type": "stock", "symbol": "TSLA"},
-    "AMZN": {"name": "Amazon", "type": "stock", "symbol": "AMZN"},
-    "GOOGL": {"name": "Alphabet", "type": "stock", "symbol": "GOOGL"},
-    "LLY": {"name": "Eli Lilly", "type": "stock", "symbol": "LLY"},
-    "ASML": {"name": "ASML", "type": "stock", "symbol": "ASML"},
+    "XAUUSD": {"name": "Or / Gold", "type": "commodity"},
+    "BTC": {"name": "Bitcoin", "type": "crypto"},
+    "NVDA": {"name": "Nvidia", "type": "stock"},
+    "MSFT": {"name": "Microsoft", "type": "stock"},
+    "AAPL": {"name": "Apple", "type": "stock"},
+    "TSLA": {"name": "Tesla", "type": "stock"},
+    "AMZN": {"name": "Amazon", "type": "stock"},
+    "GOOGL": {"name": "Alphabet", "type": "stock"},
+    "LLY": {"name": "Eli Lilly", "type": "stock"},
+    "ASML": {"name": "ASML", "type": "stock"},
 }
 
 INITIAL_CAPITAL = 1000.0
+RISK_PER_TRADE = 0.20
+MAX_POSITION = 200.0
 
 
 def load_state():
@@ -100,43 +104,54 @@ def get_stock_price(symbol):
         return None
 
 
-def get_high_impact_news():
+def get_forex_factory_news():
+    """Verifie les news a fort impact via le flux RSS Forex Factory"""
+    HIGH_IMPACT_KEYWORDS = [
+        "interest rate", "nonfarm", "non-farm", "CPI", "GDP", "unemployment",
+        "federal reserve", "fed", "ECB", "BOE", "inflation", "FOMC",
+        "taux directeur", "chomage", "banque centrale"
+    ]
     try:
         r = requests.get(
-            "https://finnhub.io/api/v1/calendar/economic",
-            params={"token": FINNHUB_KEY},
+            "https://www.forexfactory.com/ff_calendar_thisweek.xml",
             timeout=10,
+            headers={"User-Agent": "Mozilla/5.0"}
         )
-        data = r.json()
-        events = data.get("economicCalendar", [])
-        now = datetime.now(timezone.utc).timestamp()
-        for event in events:
-            if event.get("impact") == "high":
-                event_time = event.get("time", 0)
-                if 0 < (event_time - now) < 3600:
-                    return True, event.get("event", "News importante")
+        if r.status_code != 200:
+            print(f"Forex Factory RSS non disponible: {r.status_code}")
+            return False, None
+
+        root = ET.fromstring(r.content)
+        for item in root.findall(".//event"):
+            impact = item.findtext("impact", "").lower()
+            title = item.findtext("title", "").lower()
+            if impact in ["high", "red"]:
+                for kw in HIGH_IMPACT_KEYWORDS:
+                    if kw.lower() in title:
+                        return True, item.findtext("title", "News importante")
         return False, None
     except Exception as e:
-        print(f"Erreur news: {e}")
+        print(f"Erreur Forex Factory: {e}")
         return False, None
 
 
 def fetch_all_prices():
     prices = {}
     prices["BTC"] = get_btc_price()
-    time.sleep(1)
+    time.sleep(2)
     prices["XAUUSD"] = get_gold_price()
-    time.sleep(12)
+    time.sleep(15)
     stock_symbols = ["NVDA", "MSFT", "AAPL", "TSLA", "AMZN", "GOOGL", "LLY", "ASML"]
     for sym in stock_symbols:
         prices[sym] = get_stock_price(sym)
-        time.sleep(12)
+        time.sleep(15)
     return prices
 
 
 def calculate_rsi(history, period=14):
+    """Calcul RSI corrige - retourne None si historique insuffisant"""
     if len(history) < period + 1:
-        return 50
+        return None
     gains, losses = [], []
     for i in range(1, len(history)):
         diff = history[i] - history[i - 1]
@@ -144,11 +159,13 @@ def calculate_rsi(history, period=14):
             gains.append(diff)
         else:
             losses.append(abs(diff))
+    if not gains and not losses:
+        return None
     avg_gain = sum(gains[-period:]) / period if gains else 0
     avg_loss = sum(losses[-period:]) / period if losses else 0.0001
-    rs = avg_gain / avg_loss if avg_loss else 0
+    rs = avg_gain / avg_loss
     rsi = 100 - (100 / (1 + rs))
-    return rsi
+    return round(rsi, 1)
 
 
 def analyze_signal(symbol, current_price, history):
@@ -159,21 +176,36 @@ def analyze_signal(symbol, current_price, history):
     avg = sum(recent) / len(recent)
     rsi = calculate_rsi(history)
 
-    if current_price > avg * 1.005 and rsi < 70:
-        return "ACHETER", f"Prix au-dessus MM10, RSI={rsi:.0f}"
-    elif current_price < avg * 0.995 and rsi > 30:
-        return "VENDRE", f"Prix sous MM10, RSI={rsi:.0f}"
+    if rsi is None:
+        rsi_label = "RSI=N/A"
+        rsi_ok_buy = True
+        rsi_ok_sell = True
     else:
-        return "ATTENDRE", f"Pas de signal clair, RSI={rsi:.0f}"
+        rsi_label = f"RSI={rsi}"
+        rsi_ok_buy = rsi < 70
+        rsi_ok_sell = rsi > 30
+
+    above_ma = current_price > avg * 1.005
+    below_ma = current_price < avg * 0.995
+
+    if above_ma and rsi_ok_buy:
+        return "ACHETER", f"Prix au-dessus MM10, {rsi_label}"
+    elif below_ma and rsi_ok_sell:
+        return "VENDRE", f"Prix sous MM10, {rsi_label}"
+    else:
+        return "ATTENDRE", f"Pas de signal clair, {rsi_label}"
 
 
 def run_bot():
     state = load_state()
-    print(f"=== HalalBot - {datetime.now(timezone.utc).isoformat()} ===")
+    now = datetime.now(timezone.utc)
+    print(f"=== HalalBot - {now.isoformat()} ===")
 
-    has_news, news_event = get_high_impact_news()
+    has_news, news_event = get_forex_factory_news()
     if has_news:
         print(f"News a fort impact detectee: {news_event}")
+    else:
+        print("Pas de news a fort impact detectee")
 
     prices = fetch_all_prices()
     print(f"Prix recuperes: {prices}")
@@ -194,7 +226,7 @@ def run_bot():
         if signal == "ACHETER" and not has_news:
             already_open = any(p["symbol"] == symbol for p in state["positions"])
             if not already_open and state["capital"] > 100:
-                amount = min(state["capital"] * 0.15, 200)
+                amount = min(state["capital"] * RISK_PER_TRADE, MAX_POSITION)
                 qty = amount / price
                 position = {
                     "symbol": symbol,
@@ -204,11 +236,11 @@ def run_bot():
                     "amount": amount,
                     "tp": round(price * 1.025, 2),
                     "sl": round(price * 0.988, 2),
-                    "open_time": datetime.now(timezone.utc).isoformat(),
+                    "open_time": now.isoformat(),
                 }
                 state["positions"].append(position)
                 state["capital"] = round(state["capital"] - amount, 2)
-                print(f"  -> POSITION OUVERTE: {amount} EUR sur {symbol}")
+                print(f"  -> POSITION OUVERTE: {amount:.2f} EUR sur {symbol}")
 
         remaining = []
         for pos in state["positions"]:
@@ -225,17 +257,17 @@ def run_bot():
                     "exit_price": price,
                     "gain": gain,
                     "pct": round((gain / pos["amount"]) * 100, 2),
-                    "time": datetime.now(timezone.utc).isoformat(),
+                    "time": now.isoformat(),
                     "result": "WIN" if gain > 0 else "LOSS",
                 })
-                print(f"  -> POSITION FERMEE: {gain} EUR sur {symbol}")
+                print(f"  -> POSITION FERMEE: {gain:.2f} EUR sur {symbol} ({('WIN' if gain > 0 else 'LOSS')})")
             else:
                 remaining.append(pos)
         state["positions"] = [p for p in state["positions"] if p["symbol"] != symbol] + \
                               [p for p in remaining if p["symbol"] == symbol]
 
     state["signals"] = signals
-    state["last_update"] = datetime.now(timezone.utc).isoformat()
+    state["last_update"] = now.isoformat()
     state["has_news_warning"] = has_news
     state["news_event"] = news_event
 
