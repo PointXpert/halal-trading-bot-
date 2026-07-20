@@ -152,7 +152,8 @@ def fetch_all_prices():
 def calculate_rsi(history, period=14):
     if len(history) < period + 1:
         return None
-    gains, losses = [], []
+    gains = []
+    losses = []
     for i in range(1, len(history)):
         diff = history[i] - history[i - 1]
         if diff > 0:
@@ -161,11 +162,18 @@ def calculate_rsi(history, period=14):
             losses.append(abs(diff))
     if not gains and not losses:
         return None
-    avg_gain = sum(gains[-period:]) / period if gains else 0.0001
-    avg_loss = sum(losses[-period:]) / period if losses else 0.0001
+    recent_gains = gains[-period:] if gains else []
+    recent_losses = losses[-period:] if losses else []
+    avg_gain = sum(recent_gains) / period if recent_gains else 0.0001
+    avg_loss = sum(recent_losses) / period if recent_losses else 0.0001
+    if avg_loss == 0:
+        avg_loss = 0.0001
+    if avg_gain == 0:
+        avg_gain = 0.0001
     rs = avg_gain / avg_loss
     rsi = 100 - (100 / (1 + rs))
     return round(rsi, 1)
+
 
 
 
