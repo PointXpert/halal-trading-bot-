@@ -202,7 +202,7 @@ def run_bot():
     now = datetime.now(timezone.utc)
     print(f"=== HalalBot - {now.isoformat()} ===")
 
-    has_news, news_event = get_forex_factory_news()
+        has_news, news_event = get_high_impact_news()
     if has_news:
         print(f"News a fort impact detectee: {news_event}")
     else:
