@@ -447,7 +447,6 @@
   "price_history": {
     "XAUUSD": [],
     "BTC": [
-      64073.0,
       63911.0,
       63726.0,
       63446.0,
@@ -496,10 +495,10 @@
       65242.0,
       65257.0,
       65184.0,
-      65193.0
+      65193.0,
+      65404.0
     ],
     "NVDA": [
-      212.5,
       207.4,
       207.4,
       207.4,
@@ -546,12 +545,12 @@
       202.81,
       202.81,
       202.81,
+      203.28,
       203.28,
       203.28,
       203.28
     ],
     "MSFT": [
-      395.63,
       401.1,
       401.1,
       401.1,
@@ -598,12 +597,12 @@
       393.82,
       393.82,
       393.82,
+      402.29,
       402.29,
       402.29,
       402.29
     ],
     "AAPL": [
-      327.5,
       333.26,
       333.26,
       333.26,
@@ -650,12 +649,12 @@
       333.74,
       333.74,
       333.74,
+      326.59,
       326.59,
       326.59,
       326.59
     ],
     "TSLA": [
-      394.46,
       391.06,
       391.06,
       391.06,
@@ -702,6 +701,7 @@
       380.84,
       380.84,
       380.84,
+      369.57,
       369.57,
       369.57,
       369.57
@@ -917,9 +917,9 @@
   },
   "signals": {
     "BTC": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=56.9",
-      "price": 65193.0
+      "signal": "ACHETER",
+      "reason": "Prix au-dessus MM10, RSI=58.2",
+      "price": 65404.0
     },
     "NVDA": {
       "signal": "ATTENDRE",
@@ -940,29 +940,9 @@
       "signal": "ATTENDRE",
       "reason": "Pas de signal clair, RSI=0.0",
       "price": 369.57
-    },
-    "AMZN": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=99.9",
-      "price": 249.99
-    },
-    "GOOGL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 351.99
-    },
-    "LLY": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=42.1",
-      "price": 1146.9
-    },
-    "ASML": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0.0",
-      "price": 1739.02
     }
   },
-  "last_update": "2026-07-20T23:58:28.595919+00:00",
+  "last_update": "2026-07-21T03:34:25.957962+00:00",
   "has_news_warning": true,
   "news_event": "CPI m/m"
 }
