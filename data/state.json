@@ -447,7 +447,6 @@
   "price_history": {
     "XAUUSD": [],
     "BTC": [
-      63971.0,
       63962.0,
       64115.0,
       64078.0,
@@ -496,7 +495,8 @@
       65814.0,
       65844.0,
       66031.0,
-      65831.0
+      65831.0,
+      65892.0
     ],
     "NVDA": [
       202.81,
@@ -918,51 +918,11 @@
   "signals": {
     "BTC": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=58.9",
-      "price": 65831.0
-    },
-    "NVDA": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 207.29
-    },
-    "MSFT": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=65.1",
-      "price": 397.75
-    },
-    "AAPL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=99.9",
-      "price": 327.74
-    },
-    "TSLA": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 378.93
-    },
-    "AMZN": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=53.1",
-      "price": 247.55
-    },
-    "GOOGL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=51.9",
-      "price": 347.15
-    },
-    "LLY": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 1175.41
-    },
-    "ASML": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 1801.51
+      "reason": "Pas de signal clair, RSI=58.6",
+      "price": 65892.0
     }
   },
-  "last_update": "2026-07-22T19:25:08.763400+00:00",
+  "last_update": "2026-07-22T21:11:40.922969+00:00",
   "has_news_warning": true,
   "news_event": "CPI m/m"
 }
