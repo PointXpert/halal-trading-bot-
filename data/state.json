@@ -446,7 +446,6 @@
   "price_history": {
     "XAUUSD": [],
     "BTC": [
-      64444.0,
       64362.0,
       64650.0,
       64608.0,
@@ -495,7 +494,8 @@
       65003.0,
       63922.0,
       63856.0,
-      64107.0
+      64107.0,
+      64143.0
     ],
     "NVDA": [
       202.81,
@@ -508,7 +508,6 @@
       202.81,
       202.81,
       202.81,
-      202.81,
       203.28,
       203.28,
       203.28,
@@ -547,7 +546,8 @@
       208.76,
       208.76,
       208.76,
-      208.76
+      208.76,
+      206.84
     ],
     "MSFT": [
       393.82,
@@ -560,7 +560,6 @@
       393.82,
       393.82,
       393.82,
-      393.82,
       402.29,
       402.29,
       402.29,
@@ -599,7 +598,8 @@
       381.58,
       381.58,
       381.58,
-      381.58
+      381.58,
+      381.7
     ],
     "AAPL": [
       333.74,
@@ -612,7 +612,6 @@
       333.74,
       333.74,
       333.74,
-      333.74,
       326.59,
       326.59,
       326.59,
@@ -651,7 +650,8 @@
       321.66,
       321.66,
       321.66,
-      321.66
+      321.66,
+      333.02
     ],
     "TSLA": [
       380.84,
@@ -664,7 +664,6 @@
       380.84,
       380.84,
       380.84,
-      380.84,
       369.57,
       369.57,
       369.57,
@@ -703,7 +702,8 @@
       319.69,
       319.69,
       319.69,
-      319.69
+      319.69,
+      313.03
     ],
     "AMZN": [
       247.23,
@@ -717,7 +717,6 @@
       247.23,
       247.23,
       247.23,
-      247.23,
       249.99,
       249.99,
       249.99,
@@ -755,7 +754,8 @@
       233.66,
       233.66,
       233.66,
-      233.66
+      233.66,
+      232.11
     ],
     "GOOGL": [
       346.77,
@@ -769,7 +769,6 @@
       346.77,
       346.77,
       346.77,
-      346.77,
       351.99,
       351.99,
       351.99,
@@ -807,10 +806,10 @@
       317.69,
       317.69,
       317.69,
-      317.69
+      317.69,
+      319.74
     ],
     "LLY": [
-      1179.11,
       1179.11,
       1179.11,
       1179.11,
@@ -859,7 +858,8 @@
       1185.87,
       1185.87,
       1185.87,
-      1185.87
+      1185.87,
+      1196.36
     ],
     "ASML": [
       1747.58,
@@ -873,7 +873,6 @@
       1747.58,
       1747.58,
       1747.58,
-      1747.58,
       1739.02,
       1739.02,
       1739.02,
@@ -911,57 +910,58 @@
       1803.0,
       1803.0,
       1803.0,
-      1803.0
+      1803.0,
+      1757.09
     ]
   },
   "signals": {
     "BTC": {
       "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=32.9",
-      "price": 64107.0
+      "reason": "Prix sous MM10, RSI=30.5",
+      "price": 64143.0
     },
     "NVDA": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=73.7",
-      "price": 208.76
+      "signal": "VENDRE",
+      "reason": "Prix sous MM10, RSI=63.9",
+      "price": 206.84
     },
     "MSFT": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=49.2",
-      "price": 381.58
+      "reason": "Pas de signal clair, RSI=49.5",
+      "price": 381.7
     },
     "AAPL": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=21.4",
-      "price": 321.66
+      "reason": "Pas de signal clair, RSI=74.7",
+      "price": 333.02
     },
     "TSLA": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=14.7",
-      "price": 319.69
+      "reason": "Pas de signal clair, RSI=13.3",
+      "price": 313.03
     },
     "AMZN": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=19.8",
-      "price": 233.66
+      "reason": "Pas de signal clair, RSI=17.8",
+      "price": 232.11
     },
     "GOOGL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=17.6",
-      "price": 317.69
+      "signal": "ACHETER",
+      "reason": "Prix au-dessus MM10, RSI=23.0",
+      "price": 319.74
     },
     "LLY": {
       "signal": "ATTENDRE",
       "reason": "Pas de signal clair, RSI=100.0",
-      "price": 1185.87
+      "price": 1196.36
     },
     "ASML": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 1803.0
+      "signal": "VENDRE",
+      "reason": "Prix sous MM10, RSI=58.2",
+      "price": 1757.09
     }
   },
-  "last_update": "2026-07-24T18:20:15.918813+00:00",
+  "last_update": "2026-07-24T20:22:05.710868+00:00",
   "has_news_warning": true,
   "news_event": "CPI m/m"
 }
