@@ -1,7 +1,6 @@
 """
-HalalBot - Bot de paper trading avec vraies donnees de marche
-100% halal - Sans interets, sans levier, sans CFD
-Cycle toutes les 4h - Forex Factory RSS - RSI corrige
+HalalBot v2 - Connecte a Trading 212
+100% halal - Scanner universel - Reversal + RSI + MM
 """
 import os
 import json
@@ -10,46 +9,133 @@ import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 
+T212_API_KEY = os.environ.get("T212_API_KEY", "")
+T212_SECRET = os.environ.get("T212_SECRET", "")
 ALPHA_VANTAGE_KEY = os.environ.get("ALPHA_VANTAGE_KEY", "")
-FINNHUB_KEY = os.environ.get("FINNHUB_KEY", "")
 
 DATA_FILE = "data/state.json"
-
-INSTRUMENTS = {
-    "XAUUSD": {"name": "Or / Gold", "type": "commodity"},
-    "BTC": {"name": "Bitcoin", "type": "crypto"},
-    "NVDA": {"name": "Nvidia", "type": "stock"},
-    "MSFT": {"name": "Microsoft", "type": "stock"},
-    "AAPL": {"name": "Apple", "type": "stock"},
-    "TSLA": {"name": "Tesla", "type": "stock"},
-    "AMZN": {"name": "Amazon", "type": "stock"},
-    "GOOGL": {"name": "Alphabet", "type": "stock"},
-    "LLY": {"name": "Eli Lilly", "type": "stock"},
-    "ASML": {"name": "ASML", "type": "stock"},
-}
-
 INITIAL_CAPITAL = 1000.0
 RISK_PER_TRADE = 0.20
 MAX_POSITION = 200.0
 
+T212_BASE = "https://live.trading212.com/api/v0"
 
-def load_state():
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r") as f:
-            return json.load(f)
+HALAL_TICKERS = {
+    "AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", "TSLA", "ASML", "LLY",
+    "AMD", "AVGO", "TSM", "ORCL", "ADBE", "CRM", "QCOM", "TXN",
+    "INTC", "MU", "AMAT", "LRCX", "KLAC", "MRVL", "CDNS", "SNPS",
+    "NOW", "WDAY", "DDOG", "ZS", "CRWD", "PANW", "FTNT",
+    "UNH", "JNJ", "ABT", "MDT", "SYK", "BSX", "EW", "ISRG",
+    "PFE", "MRK", "LLY", "ABBV", "AMGN", "GILD", "REGN", "VRTX",
+    "XOM", "CVX", "COP", "EOG", "PXD", "SLB", "HAL", "BKR",
+    "GEV", "NEE", "AEP", "XEL", "CCJ", "NEM", "GOLD",
+    "COST", "WMT", "TGT", "HD", "LOW", "NKE", "SBUX",
+    "BA", "CAT", "DE", "HON", "GE", "MMM", "ITW", "EMR",
+    "NOK", "ERIC", "TMUS", "VZ", "CSCO", "ANET", "JNPR",
+}
+
+
+def t212_headers():
     return {
-        "capital": INITIAL_CAPITAL,
-        "positions": [],
-        "trades": [],
-        "price_history": {k: [] for k in INSTRUMENTS},
-        "last_update": None,
+        "Authorization": T212_API_KEY,
+        "Content-Type": "application/json"
     }
 
 
-def save_state(state):
-    os.makedirs("data", exist_ok=True)
-    with open(DATA_FILE, "w") as f:
-        json.dump(state, f, indent=2)
+def get_t212_positions():
+    try:
+        r = requests.get(
+            f"{T212_BASE}/equity/portfolio",
+            headers=t212_headers(),
+            timeout=10
+        )
+        if r.status_code == 200:
+            return r.json()
+        print(f"T212 portfolio error: {r.status_code}")
+        return []
+    except Exception as e:
+        print(f"Erreur T212 portfolio: {e}")
+        return []
+
+
+def get_t212_cash():
+    try:
+        r = requests.get(
+            f"{T212_BASE}/equity/account/cash",
+            headers=t212_headers(),
+            timeout=10
+        )
+        if r.status_code == 200:
+            data = r.json()
+            return float(data.get("free", 0))
+        print(f"T212 cash error: {r.status_code}")
+        return None
+    except Exception as e:
+        print(f"Erreur T212 cash: {e}")
+        return None
+
+
+def get_t212_instruments():
+    try:
+        r = requests.get(
+            f"{T212_BASE}/equity/metadata/instruments",
+            headers=t212_headers(),
+            timeout=15
+        )
+        if r.status_code == 200:
+            instruments = r.json()
+            halal = [
+                i for i in instruments
+                if i.get("ticker", "").upper() in HALAL_TICKERS
+            ]
+            print(f"Instruments halal trouves sur T212: {len(halal)}")
+            return halal
+        print(f"T212 instruments error: {r.status_code}")
+        return []
+    except Exception as e:
+        print(f"Erreur T212 instruments: {e}")
+        return []
+
+
+def get_t212_price(ticker):
+    try:
+        r = requests.get(
+            f"{T212_BASE}/equity/metadata/instruments",
+            headers=t212_headers(),
+            timeout=10
+        )
+        if r.status_code == 200:
+            instruments = r.json()
+            for inst in instruments:
+                if inst.get("ticker", "").upper() == ticker.upper():
+                    return float(inst.get("currentPrice", 0)) or None
+        return None
+    except Exception as e:
+        print(f"Erreur prix T212 {ticker}: {e}")
+        return None
+
+
+def place_t212_order(ticker, value_eur):
+    try:
+        payload = {
+            "ticker": ticker,
+            "value": round(value_eur, 2),
+            "timeValidity": "DAY"
+        }
+        r = requests.post(
+            f"{T212_BASE}/equity/orders/market",
+            headers=t212_headers(),
+            json=payload,
+            timeout=10
+        )
+        if r.status_code in [200, 201]:
+            print(f"  -> ORDRE T212 PLACE: {value_eur}EUR sur {ticker}")
+            return r.json()
+        print(f"  -> ERREUR ORDRE T212 {ticker}: {r.status_code} {r.text}")
+        return None
+    except Exception as e:
+        print(f"Erreur ordre T212 {ticker}: {e}")
+        return None
 
 
 def get_btc_price():
@@ -65,27 +151,7 @@ def get_btc_price():
         return None
 
 
-def get_gold_price():
-    try:
-        r = requests.get(
-            "https://www.alphavantage.co/query",
-            params={
-                "function": "CURRENCY_EXCHANGE_RATE",
-                "from_currency": "XAU",
-                "to_currency": "USD",
-                "apikey": ALPHA_VANTAGE_KEY,
-            },
-            timeout=10,
-        )
-        data = r.json()
-        rate = data.get("Realtime Currency Exchange Rate", {}).get("5. Exchange Rate")
-        return float(rate) if rate else None
-    except Exception as e:
-        print(f"Erreur Gold: {e}")
-        return None
-
-
-def get_stock_price(symbol):
+def get_alpha_price(symbol):
     try:
         r = requests.get(
             "https://www.alphavantage.co/query",
@@ -100,7 +166,7 @@ def get_stock_price(symbol):
         price = data.get("Global Quote", {}).get("05. price")
         return float(price) if price else None
     except Exception as e:
-        print(f"Erreur {symbol}: {e}")
+        print(f"Erreur Alpha {symbol}: {e}")
         return None
 
 
@@ -117,9 +183,11 @@ def get_high_impact_news():
     ]
     for url in sources:
         try:
-            r = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+            r = requests.get(
+                url, timeout=10,
+                headers={"User-Agent": "Mozilla/5.0"}
+            )
             if r.status_code != 200:
-                print(f"Source non disponible: {r.status_code}")
                 continue
             root = ET.fromstring(r.content)
             items = root.findall(".//item") or root.findall(".//event")
@@ -135,20 +203,6 @@ def get_high_impact_news():
     return False, None
 
 
-
-def fetch_all_prices():
-    prices = {}
-    prices["BTC"] = get_btc_price()
-    time.sleep(2)
-    prices["XAUUSD"] = get_gold_price()
-    time.sleep(15)
-    stock_symbols = ["NVDA", "MSFT", "AAPL", "TSLA", "AMZN", "GOOGL", "LLY", "ASML"]
-    for sym in stock_symbols:
-        prices[sym] = get_stock_price(sym)
-        time.sleep(15)
-    return prices
-
-
 def calculate_rsi(history, period=14):
     if len(history) < period + 1:
         return None
@@ -162,10 +216,8 @@ def calculate_rsi(history, period=14):
             losses.append(abs(diff))
     if not gains and not losses:
         return None
-    recent_gains = gains[-period:] if gains else []
-    recent_losses = losses[-period:] if losses else []
-    avg_gain = sum(recent_gains) / period if recent_gains else 0.0001
-    avg_loss = sum(recent_losses) / period if recent_losses else 0.0001
+    avg_gain = sum(gains[-period:]) / period if gains else 0.0001
+    avg_loss = sum(losses[-period:]) / period if losses else 0.0001
     if avg_loss == 0:
         avg_loss = 0.0001
     if avg_gain == 0:
@@ -173,8 +225,6 @@ def calculate_rsi(history, period=14):
     rs = avg_gain / avg_loss
     rsi = 100 - (100 / (1 + rs))
     return round(rsi, 1)
-
-
 
 
 def analyze_signal(symbol, current_price, history):
@@ -197,6 +247,12 @@ def analyze_signal(symbol, current_price, history):
     above_ma = current_price > avg * 1.005
     below_ma = current_price < avg * 0.995
 
+    if rsi is not None and rsi < 30 and below_ma:
+        return "REVERSAL HAUSSIER", f"RSI survente {rsi_label} retournement probable"
+
+    if rsi is not None and rsi > 70 and above_ma:
+        return "REVERSAL BAISSIER", f"RSI surachat {rsi_label} correction probable"
+
     if above_ma and rsi_ok_buy:
         return "ACHETER", f"Prix au-dessus MM10, {rsi_label}"
     elif below_ma and rsi_ok_sell:
@@ -205,83 +261,170 @@ def analyze_signal(symbol, current_price, history):
         return "ATTENDRE", f"Pas de signal clair, {rsi_label}"
 
 
+def load_state():
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, "r") as f:
+            return json.load(f)
+    return {
+        "capital": INITIAL_CAPITAL,
+        "positions": [],
+        "trades": [],
+        "price_history": {},
+        "last_update": None,
+        "mode": "paper"
+    }
+
+
+def save_state(state):
+    os.makedirs("data", exist_ok=True)
+    with open(DATA_FILE, "w") as f:
+        json.dump(state, f, indent=2)
+
+
 def run_bot():
     state = load_state()
     now = datetime.now(timezone.utc)
-    print(f"=== HalalBot - {now.isoformat()} ===")
+    print(f"=== HalalBot v2 - {now.isoformat()} ===")
 
     has_news, news_event = get_high_impact_news()
     if has_news:
-        print(f"News a fort impact detectee: {news_event}")
+        print(f"News a fort impact: {news_event}")
     else:
-        print("Pas de news a fort impact detectee")
+        print("Pas de news a fort impact")
 
-    prices = fetch_all_prices()
-    print(f"Prix recuperes: {prices}")
+    cash_t212 = get_t212_cash()
+    if cash_t212 is not None:
+        print(f"Capital T212 reel: {cash_t212} EUR")
+        state["capital_reel"] = cash_t212
+    else:
+        print("T212 non connecte - mode paper trading")
+
+    instruments = get_t212_instruments()
+    if not instruments:
+        instruments = [
+            {"ticker": t} for t in [
+                "NVDA", "MSFT", "AAPL", "TSLA", "AMZN",
+                "GOOGL", "LLY", "ASML", "AMD", "NOK"
+            ]
+        ]
 
     signals = {}
-    for symbol, price in prices.items():
-        if price is None:
+    best_signals = []
+
+    for inst in instruments[:30]:
+        ticker = inst.get("ticker", "").upper()
+        if not ticker:
             continue
 
-        history = state["price_history"].setdefault(symbol, [])
+        price = None
+        if ticker == "BTC":
+            price = get_btc_price()
+        else:
+            price = get_alpha_price(ticker)
+            if price is None:
+                price = float(inst.get("currentPrice", 0)) or None
+
+        if price is None or price == 0:
+            continue
+
+        history = state["price_history"].setdefault(ticker, [])
         history.append(price)
-        state["price_history"][symbol] = history[-50:]
+        state["price_history"][ticker] = history[-50:]
 
-        signal, reason = analyze_signal(symbol, price, history)
-        signals[symbol] = {"signal": signal, "reason": reason, "price": price}
-        print(f"{symbol}: {price} -> {signal} ({reason})")
+        signal, reason = analyze_signal(ticker, price, history)
+        signals[ticker] = {"signal": signal, "reason": reason, "price": price}
+        print(f"{ticker}: {price} -> {signal} ({reason})")
 
-        if signal == "ACHETER" and not has_news:
-            already_open = any(p["symbol"] == symbol for p in state["positions"])
-            if not already_open and state["capital"] > 100:
-                amount = min(state["capital"] * RISK_PER_TRADE, MAX_POSITION)
-                qty = amount / price
-                position = {
-                    "symbol": symbol,
-                    "name": INSTRUMENTS[symbol]["name"],
-                    "entry_price": price,
-                    "qty": qty,
-                    "amount": amount,
-                    "tp": round(price * 1.025, 2),
-                    "sl": round(price * 0.988, 2),
-                    "open_time": now.isoformat(),
-                }
+        if signal in ["ACHETER", "REVERSAL HAUSSIER"] and not has_news:
+            already_open = any(
+                p["symbol"] == ticker for p in state["positions"]
+            )
+            if not already_open:
+                best_signals.append({
+                    "ticker": ticker,
+                    "price": price,
+                    "signal": signal,
+                    "reason": reason
+                })
+
+        time.sleep(1)
+
+    best_signals.sort(
+        key=lambda x: 0 if x["signal"] == "REVERSAL HAUSSIER" else 1
+    )
+
+    for sig in best_signals[:3]:
+        ticker = sig["ticker"]
+        price = sig["price"]
+        signal = sig["signal"]
+
+        if state["capital"] < 100:
+            break
+
+        amount = min(state["capital"] * RISK_PER_TRADE, MAX_POSITION)
+        if signal == "REVERSAL HAUSSIER":
+            amount = amount * 0.7
+
+        qty = amount / price
+        position = {
+            "symbol": ticker,
+            "name": ticker,
+            "entry_price": price,
+            "qty": qty,
+            "amount": amount,
+            "tp": round(price * 1.03, 2),
+            "sl": round(price * 0.985, 2),
+            "open_time": now.isoformat(),
+            "strategy": signal,
+        }
+
+        if cash_t212 is not None and cash_t212 > amount:
+            result = place_t212_order(ticker, amount)
+            if result:
                 state["positions"].append(position)
                 state["capital"] = round(state["capital"] - amount, 2)
-                print(f"  -> POSITION OUVERTE: {amount:.2f} EUR sur {symbol}")
+                print(f"  -> ORDRE REEL: {amount}EUR sur {ticker} ({signal})")
+        else:
+            state["positions"].append(position)
+            state["capital"] = round(state["capital"] - amount, 2)
+            print(f"  -> PAPER TRADE: {amount}EUR sur {ticker} ({signal})")
 
-        remaining = []
-        for pos in state["positions"]:
-            if pos["symbol"] != symbol:
-                remaining.append(pos)
-                continue
-            if price >= pos["tp"] or price <= pos["sl"]:
-                gain = round((price - pos["entry_price"]) * pos["qty"], 2)
-                state["capital"] = round(state["capital"] + pos["amount"] + gain, 2)
-                state["trades"].append({
-                    "symbol": symbol,
-                    "name": pos["name"],
-                    "entry_price": pos["entry_price"],
-                    "exit_price": price,
-                    "gain": gain,
-                    "pct": round((gain / pos["amount"]) * 100, 2),
-                    "time": now.isoformat(),
-                    "result": "WIN" if gain > 0 else "LOSS",
-                })
-                print(f"  -> POSITION FERMEE: {gain:.2f} EUR sur {symbol} ({('WIN' if gain > 0 else 'LOSS')})")
-            else:
-                remaining.append(pos)
-        state["positions"] = [p for p in state["positions"] if p["symbol"] != symbol] + \
-                              [p for p in remaining if p["symbol"] == symbol]
+    remaining = []
+    for pos in state["positions"]:
+        ticker = pos["symbol"]
+        sig = signals.get(ticker)
+        if sig is None:
+            remaining.append(pos)
+            continue
+        price = sig["price"]
+        if price >= pos["tp"] or price <= pos["sl"]:
+            gain = round((price - pos["entry_price"]) * pos["qty"], 2)
+            state["capital"] = round(
+                state["capital"] + pos["amount"] + gain, 2
+            )
+            state["trades"].append({
+                "symbol": ticker,
+                "name": pos["name"],
+                "entry_price": pos["entry_price"],
+                "exit_price": price,
+                "gain": gain,
+                "pct": round((gain / pos["amount"]) * 100, 2),
+                "time": now.isoformat(),
+                "result": "WIN" if gain > 0 else "LOSS",
+                "strategy": pos.get("strategy", "ACHETER"),
+            })
+            print(f"  -> FERME: {gain}EUR sur {ticker}")
+        else:
+            remaining.append(pos)
 
+    state["positions"] = remaining
     state["signals"] = signals
     state["last_update"] = now.isoformat()
     state["has_news_warning"] = has_news
     state["news_event"] = news_event
 
     save_state(state)
-    print("=== Mise a jour terminee ===")
+    print("=== HalalBot v2 termine ===")
 
 
 if __name__ == "__main__":
