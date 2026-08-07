@@ -1018,59 +1018,8 @@
       9.365
     ]
   },
-  "signals": {
-    "NVDA": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=99.0 correction probable",
-      "price": 223.96
-    },
-    "MSFT": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 499.99
-    },
-    "AAPL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 313.33
-    },
-    "TSLA": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=92.6 correction probable",
-      "price": 328.58
-    },
-    "AMZN": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=97.4 correction probable",
-      "price": 274.48
-    },
-    "GOOGL": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=72.6",
-      "price": 354.3
-    },
-    "LLY": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=91.8",
-      "price": 1185.13
-    },
-    "ASML": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 1740.99
-    },
-    "AMD": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=89.3",
-      "price": 483.36
-    },
-    "NOK": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=78.8",
-      "price": 9.365
-    }
-  },
-  "last_update": "2026-08-07T21:41:09.197899+00:00",
+  "signals": {},
+  "last_update": "2026-08-07T22:38:26.791922+00:00",
   "has_news_warning": true,
   "news_event": "MI Inflation Gauge m/m"
 }
