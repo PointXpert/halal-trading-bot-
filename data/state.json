@@ -810,7 +810,7 @@
       354.3
     ],
     "LLY": [
-      1185.13,
+      1185.71,
       1185.71,
       1185.71,
       1185.71,
@@ -966,7 +966,7 @@
       483.36
     ],
     "NOK": [
-      9.365,
+      9.36,
       9.36,
       9.36,
       9.36,
@@ -1036,7 +1036,7 @@
     },
     "TSLA": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 328.58
     },
     "AMZN": {
@@ -1070,7 +1070,7 @@
       "price": 9.36
     }
   },
-  "last_update": "2026-08-10T13:14:12.263646+00:00",
+  "last_update": "2026-08-10T15:00:49.026776+00:00",
   "has_news_warning": true,
   "news_event": "Cleveland Fed Inflation Expectations"
 }
