@@ -1051,7 +1051,7 @@
     },
     "LLY": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=99.8",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 1185.71
     },
     "ASML": {
@@ -1070,7 +1070,7 @@
       "price": 9.36
     }
   },
-  "last_update": "2026-08-10T15:00:49.026776+00:00",
+  "last_update": "2026-08-10T16:55:39.768991+00:00",
   "has_news_warning": true,
   "news_event": "Cleveland Fed Inflation Expectations"
 }
