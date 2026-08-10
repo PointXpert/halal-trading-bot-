@@ -654,7 +654,7 @@
       313.33
     ],
     "TSLA": [
-      319.53,
+      328.58,
       328.58,
       328.58,
       328.58,
@@ -758,7 +758,7 @@
       274.48
     ],
     "GOOGL": [
-      357.75,
+      354.3,
       354.3,
       354.3,
       354.3,
@@ -811,7 +811,7 @@
     ],
     "LLY": [
       1185.13,
-      1185.13,
+      1185.71,
       1185.71,
       1185.71,
       1185.71,
@@ -967,7 +967,7 @@
     ],
     "NOK": [
       9.365,
-      9.365,
+      9.36,
       9.36,
       9.36,
       9.36,
@@ -1021,17 +1021,17 @@
   "signals": {
     "NVDA": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 223.96
     },
     "MSFT": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=98.9",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 499.99
     },
     "AAPL": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=99.8",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 313.33
     },
     "TSLA": {
@@ -1041,7 +1041,7 @@
     },
     "AMZN": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=99.9",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 274.48
     },
     "GOOGL": {
@@ -1056,7 +1056,7 @@
     },
     "ASML": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 1740.99
     },
     "AMD": {
@@ -1070,7 +1070,7 @@
       "price": 9.36
     }
   },
-  "last_update": "2026-08-10T11:49:21.717012+00:00",
+  "last_update": "2026-08-10T13:14:12.263646+00:00",
   "has_news_warning": true,
   "news_event": "Cleveland Fed Inflation Expectations"
 }
