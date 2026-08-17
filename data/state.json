@@ -812,7 +812,7 @@
     "LLY": [
       1180.395,
       1180.395,
-      1180.395,
+      1180.16,
       1180.16,
       1180.16,
       1180.16,
@@ -968,7 +968,7 @@
     "NOK": [
       10.77,
       10.77,
-      10.77,
+      10.76,
       10.76,
       10.76,
       10.76,
@@ -1031,12 +1031,12 @@
     },
     "AAPL": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=99.8",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 305.93
     },
     "TSLA": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=99.9",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 342.27
     },
     "AMZN": {
@@ -1061,16 +1061,16 @@
     },
     "AMD": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 514.39
     },
     "NOK": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=99.3",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 10.76
     }
   },
-  "last_update": "2026-08-17T01:24:34.085859+00:00",
+  "last_update": "2026-08-17T03:02:01.763996+00:00",
   "has_news_warning": true,
   "news_event": "Prelim GDP Price Index y/y"
 }
