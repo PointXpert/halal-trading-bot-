@@ -1018,59 +1018,8 @@
       10.78
     ]
   },
-  "signals": {
-    "NVDA": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0.9",
-      "price": 225.01
-    },
-    "MSFT": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0.0",
-      "price": 480.35
-    },
-    "AAPL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0.4",
-      "price": 305.59
-    },
-    "TSLA": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0.0",
-      "price": 339.3
-    },
-    "AMZN": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=33.3",
-      "price": 261.31
-    },
-    "GOOGL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0.1",
-      "price": 344.0
-    },
-    "LLY": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=73.1",
-      "price": 1183.16
-    },
-    "ASML": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 1883.12
-    },
-    "AMD": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0.0",
-      "price": 506.0
-    },
-    "NOK": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=64.3",
-      "price": 10.78
-    }
-  },
-  "last_update": "2026-08-18T06:47:55.407055+00:00",
+  "signals": {},
+  "last_update": "2026-08-18T07:39:38.652448+00:00",
   "has_news_warning": true,
   "news_event": "Prelim GDP Price Index y/y"
 }
