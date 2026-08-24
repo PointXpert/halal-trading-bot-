@@ -1051,7 +1051,7 @@
     },
     "LLY": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=99.8",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 1255.4
     },
     "ASML": {
@@ -1066,11 +1066,11 @@
     },
     "NOK": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=78.1",
+      "reason": "Pas de signal clair, RSI=50.0",
       "price": 10.21
     }
   },
-  "last_update": "2026-08-24T05:40:08.512786+00:00",
+  "last_update": "2026-08-24T07:02:46.607748+00:00",
   "has_news_warning": true,
   "news_event": "BOJ Core CPI y/y"
 }
