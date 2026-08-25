@@ -1018,59 +1018,8 @@
       9.96
     ]
   },
-  "signals": {
-    "NVDA": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=50.0",
-      "price": 208.48
-    },
-    "MSFT": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 487.31
-    },
-    "AAPL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=99.9",
-      "price": 310.34
-    },
-    "TSLA": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=50.0",
-      "price": 348.95
-    },
-    "AMZN": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 262.07
-    },
-    "GOOGL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 348.06
-    },
-    "LLY": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0.3",
-      "price": 1246.93
-    },
-    "ASML": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=50.0",
-      "price": 1740.13
-    },
-    "AMD": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=50.0",
-      "price": 456.745
-    },
-    "NOK": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=1.9",
-      "price": 9.96
-    }
-  },
-  "last_update": "2026-08-25T12:51:26.631988+00:00",
+  "signals": {},
+  "last_update": "2026-08-25T13:52:15.079493+00:00",
   "has_news_warning": true,
   "news_event": "BOJ Core CPI y/y"
 }
