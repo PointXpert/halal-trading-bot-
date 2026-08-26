@@ -516,7 +516,6 @@
       214.72,
       214.72,
       214.72,
-      214.72,
       208.48,
       208.48,
       208.48,
@@ -538,6 +537,7 @@
       208.48,
       208.48,
       208.48,
+      213.05,
       213.05,
       213.05,
       213.05,
@@ -568,7 +568,6 @@
       483.24,
       483.24,
       483.24,
-      483.24,
       487.31,
       487.31,
       487.31,
@@ -590,6 +589,7 @@
       487.31,
       487.31,
       487.31,
+      491.71,
       491.71,
       491.71,
       491.71,
@@ -620,7 +620,6 @@
       309.35,
       309.35,
       309.35,
-      309.35,
       310.34,
       310.34,
       310.34,
@@ -644,6 +643,7 @@
       310.34,
       309.9,
       310.34,
+      309.9,
       309.9,
       309.9,
       309.9,
@@ -672,7 +672,6 @@
       362.86,
       362.86,
       362.86,
-      362.86,
       348.95,
       348.95,
       348.95,
@@ -694,6 +693,7 @@
       348.95,
       348.95,
       348.95,
+      350.25,
       350.25,
       350.25,
       350.25,
@@ -1038,39 +1038,9 @@
       "signal": "ATTENDRE",
       "reason": "Pas de signal clair, RSI=99.9",
       "price": 350.25
-    },
-    "AMZN": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=77.3",
-      "price": 261.06
-    },
-    "GOOGL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=74.7",
-      "price": 346.96
-    },
-    "LLY": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=0.0",
-      "price": 1233.66
-    },
-    "ASML": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 1744.16
-    },
-    "AMD": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 479.18
-    },
-    "NOK": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=99.6",
-      "price": 10.35
     }
   },
-  "last_update": "2026-08-26T07:49:30.902107+00:00",
+  "last_update": "2026-08-26T08:47:11.908157+00:00",
   "has_news_warning": true,
   "news_event": "BOJ Core CPI y/y"
 }
