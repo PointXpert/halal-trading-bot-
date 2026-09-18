@@ -499,7 +499,6 @@
     ],
     "NVDA": [
       223.67,
-      223.67,
       218.36,
       218.36,
       218.36,
@@ -547,11 +546,11 @@
       219.34,
       219.34,
       219.34,
-      219.34
+      219.34,
+      222.27
     ],
     "MSFT": [
       491.65,
-      491.65,
       492.44,
       492.44,
       492.44,
@@ -599,11 +598,11 @@
       497.75,
       497.75,
       497.75,
-      497.75
+      497.75,
+      493.78
     ],
     "AAPL": [
       315.34,
-      315.34,
       326.57,
       326.57,
       326.57,
@@ -651,11 +650,11 @@
       337.0,
       337.0,
       337.0,
-      337.0
+      337.0,
+      336.13
     ],
     "TSLA": [
       367.81,
-      367.81,
       363.56,
       363.56,
       363.56,
@@ -703,11 +702,11 @@
       366.2,
       366.2,
       366.2,
-      366.2
+      366.2,
+      364.27
     ],
     "AMZN": [
       252.4,
-      252.4,
       251.89,
       251.89,
       251.89,
@@ -755,11 +754,11 @@
       251.19,
       251.19,
       251.19,
-      251.19
+      251.19,
+      253.71
     ],
     "GOOGL": [
       330.65,
-      330.65,
       332.6,
       332.6,
       332.6,
@@ -807,10 +806,10 @@
       347.33,
       347.33,
       347.33,
-      347.33
+      347.33,
+      349.54
     ],
     "LLY": [
-      1124.21,
       1124.21,
       1124.21,
       1123.24,
@@ -859,11 +858,11 @@
       1152.44,
       1152.44,
       1152.44,
-      1152.44
+      1152.44,
+      1152.8
     ],
     "ASML": [
       1729.52,
-      1729.52,
       1687.43,
       1687.43,
       1687.43,
@@ -911,11 +910,11 @@
       1629.67,
       1629.67,
       1629.67,
-      1629.67
+      1629.67,
+      1679.92
     ],
     "AMD": [
       521.095,
-      521.095,
       503.6,
       503.6,
       503.6,
@@ -963,10 +962,10 @@
       545.09,
       545.09,
       545.09,
-      545.09
+      545.09,
+      559.82
     ],
     "NOK": [
-      10.76,
       10.76,
       10.605,
       10.62,
@@ -1015,62 +1014,63 @@
       10.6,
       10.6,
       10.6,
-      10.6
+      10.6,
+      10.68
     ]
   },
   "signals": {
     "NVDA": {
       "signal": "REVERSAL BAISSIER",
       "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 219.34
+      "price": 222.27
     },
     "MSFT": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=75.7 correction probable",
-      "price": 497.75
+      "signal": "ATTENDRE",
+      "reason": "Pas de signal clair, RSI=66.3",
+      "price": 493.78
     },
     "AAPL": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 337.0
+      "signal": "ATTENDRE",
+      "reason": "Pas de signal clair, RSI=96.4",
+      "price": 336.13
     },
     "TSLA": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 366.2
+      "signal": "ATTENDRE",
+      "reason": "Pas de signal clair, RSI=85.6",
+      "price": 364.27
     },
     "AMZN": {
       "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=80.4 correction probable",
-      "price": 251.19
+      "reason": "RSI surachat RSI=83.7 correction probable",
+      "price": 253.71
     },
     "GOOGL": {
       "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=91.7 correction probable",
-      "price": 347.33
+      "reason": "RSI surachat RSI=92.3 correction probable",
+      "price": 349.54
     },
     "LLY": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=97.9 correction probable",
-      "price": 1152.44
+      "signal": "ATTENDRE",
+      "reason": "Pas de signal clair, RSI=97.9",
+      "price": 1152.8
     },
     "ASML": {
       "signal": "REVERSAL BAISSIER",
       "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 1629.67
+      "price": 1679.92
     },
     "AMD": {
       "signal": "REVERSAL BAISSIER",
       "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 545.09
+      "price": 559.82
     },
     "NOK": {
       "signal": "REVERSAL BAISSIER",
       "reason": "RSI surachat RSI=99.7 correction probable",
-      "price": 10.6
+      "price": 10.68
     }
   },
-  "last_update": "2026-09-18T18:08:31.310491+00:00",
+  "last_update": "2026-09-18T21:29:16.684892+00:00",
   "has_news_warning": true,
   "news_event": "CPI m/m"
 }
