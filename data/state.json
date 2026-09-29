@@ -1018,59 +1018,8 @@
       10.12
     ]
   },
-  "signals": {
-    "NVDA": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 228.86
-    },
-    "MSFT": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=80.5",
-      "price": 509.22
-    },
-    "AAPL": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=76.7",
-      "price": 338.4
-    },
-    "TSLA": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=52.0",
-      "price": 357.45
-    },
-    "AMZN": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=59.4",
-      "price": 246.15
-    },
-    "GOOGL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=90.8",
-      "price": 342.75
-    },
-    "LLY": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=98.3",
-      "price": 1184.78
-    },
-    "ASML": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 1771.41
-    },
-    "AMD": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=77.8",
-      "price": 607.87
-    },
-    "NOK": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=50.4",
-      "price": 10.12
-    }
-  },
-  "last_update": "2026-09-29T01:34:47.518850+00:00",
+  "signals": {},
+  "last_update": "2026-09-29T08:03:51.886925+00:00",
   "has_news_warning": true,
   "news_event": "FOMC Member Bowman Speaks"
 }
