@@ -503,7 +503,6 @@
       228.87,
       228.87,
       228.87,
-      228.87,
       225.51,
       225.51,
       225.51,
@@ -545,6 +544,7 @@
       230.86,
       230.86,
       230.86,
+      233.95,
       233.95,
       233.95,
       233.95
@@ -555,7 +555,6 @@
       498.0,
       498.0,
       498.0,
-      498.0,
       500.59,
       500.59,
       500.59,
@@ -597,6 +596,7 @@
       512.8,
       512.8,
       512.8,
+      517.53,
       517.53,
       517.53,
       517.53
@@ -607,7 +607,6 @@
       339.75,
       339.75,
       339.75,
-      339.75,
       337.02,
       337.02,
       337.02,
@@ -649,6 +648,7 @@
       330.32,
       330.32,
       330.32,
+      333.69,
       333.69,
       333.69,
       333.69
@@ -659,7 +659,6 @@
       378.9,
       378.9,
       378.9,
-      378.9,
       380.12,
       380.12,
       380.12,
@@ -701,6 +700,7 @@
       354.11,
       354.11,
       354.11,
+      370.59,
       370.59,
       370.59,
       370.59
@@ -711,7 +711,6 @@
       254.98,
       254.98,
       254.98,
-      254.98,
       249.27,
       249.27,
       249.27,
@@ -753,6 +752,7 @@
       248.23,
       248.23,
       248.23,
+      251.52,
       251.52,
       251.52,
       251.52
@@ -763,7 +763,6 @@
       351.16,
       351.16,
       351.16,
-      351.16,
       337.83,
       337.83,
       337.83,
@@ -805,12 +804,12 @@
       338.24,
       338.24,
       338.24,
+      343.5,
       343.5,
       343.5,
       343.5
     ],
     "LLY": [
-      1170.45,
       1170.14,
       1170.14,
       1170.14,
@@ -859,6 +858,7 @@
       1149.85,
       1144.2,
       1142.85,
+      1142.85,
       1142.85
     ],
     "ASML": [
@@ -867,7 +867,6 @@
       1747.9,
       1747.9,
       1747.9,
-      1747.9,
       1744.61,
       1744.61,
       1744.61,
@@ -909,6 +908,7 @@
       1808.49,
       1808.49,
       1808.49,
+      1867.31,
       1867.31,
       1867.31,
       1867.31
@@ -919,7 +919,6 @@
       623.77,
       623.77,
       623.77,
-      623.77,
       614.61,
       614.61,
       614.61,
@@ -961,12 +960,12 @@
       615.73,
       615.73,
       615.73,
+      633.91,
       633.91,
       633.91,
       633.91
     ],
     "NOK": [
-      10.84,
       10.82,
       10.82,
       10.82,
@@ -1015,28 +1014,29 @@
       10.37,
       10.61,
       10.6,
+      10.6,
       10.6
     ]
   },
   "signals": {
     "NVDA": {
       "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=88.3 correction probable",
+      "reason": "RSI surachat RSI=87.0 correction probable",
       "price": 233.95
     },
     "MSFT": {
       "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=98.8 correction probable",
+      "reason": "RSI surachat RSI=99.7 correction probable",
       "price": 517.53
     },
     "AAPL": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=52.5",
+      "reason": "Pas de signal clair, RSI=81.8",
       "price": 333.69
     },
     "TSLA": {
       "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=81.4 correction probable",
+      "reason": "RSI surachat RSI=96.6 correction probable",
       "price": 370.59
     },
     "AMZN": {
@@ -1045,23 +1045,23 @@
       "price": 251.52
     },
     "GOOGL": {
-      "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=65.4",
+      "signal": "REVERSAL BAISSIER",
+      "reason": "RSI surachat RSI=71.3 correction probable",
       "price": 343.5
     },
     "LLY": {
       "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=50.9",
+      "reason": "Prix sous MM10, RSI=47.5",
       "price": 1142.85
     },
     "ASML": {
       "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=88.9 correction probable",
+      "reason": "RSI surachat RSI=86.8 correction probable",
       "price": 1867.31
     },
     "AMD": {
       "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=99.4 correction probable",
+      "reason": "RSI surachat RSI=99.3 correction probable",
       "price": 633.91
     },
     "NOK": {
@@ -1070,7 +1070,7 @@
       "price": 10.6
     }
   },
-  "last_update": "2026-10-03T06:10:45.582891+00:00",
+  "last_update": "2026-10-03T12:19:01.277993+00:00",
   "has_news_warning": true,
   "news_event": "FOMC Member Bowman Speaks"
 }
