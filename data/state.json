@@ -501,7 +501,6 @@
       224.58,
       224.58,
       224.58,
-      224.58,
       225.07,
       225.07,
       225.07,
@@ -547,13 +546,13 @@
       233.95,
       233.95,
       233.95,
-      233.95
+      233.95,
+      238.9
     ],
     "MSFT": [
       497.93,
       497.93,
       497.93,
-      497.93,
       516.17,
       516.17,
       516.17,
@@ -599,13 +598,13 @@
       517.53,
       517.53,
       517.53,
-      517.53
+      517.53,
+      525.18
     ],
     "AAPL": [
       335.92,
       335.92,
       335.92,
-      335.92,
       341.07,
       341.07,
       341.07,
@@ -651,13 +650,13 @@
       333.69,
       333.69,
       333.69,
-      333.69
+      333.69,
+      332.89
     ],
     "TSLA": [
       377.94,
       377.94,
       377.94,
-      377.94,
       372.11,
       372.11,
       372.11,
@@ -703,13 +702,13 @@
       370.59,
       370.59,
       370.59,
-      370.59
+      370.59,
+      378.73
     ],
     "AMZN": [
       249.38,
       249.38,
       249.38,
-      249.38,
       249.67,
       249.67,
       249.67,
@@ -755,13 +754,13 @@
       251.52,
       251.52,
       251.52,
-      251.52
+      251.52,
+      251.4
     ],
     "GOOGL": [
       342.36,
       342.36,
       342.36,
-      342.36,
       343.92,
       343.92,
       343.92,
@@ -807,10 +806,10 @@
       343.5,
       343.5,
       343.5,
-      343.5
+      343.5,
+      346.47
     ],
     "LLY": [
-      1181.89,
       1181.89,
       1181.89,
       1181.89,
@@ -859,13 +858,13 @@
       1142.85,
       1142.85,
       1142.85,
-      1142.85
+      1142.85,
+      1143.12
     ],
     "ASML": [
       1722.5,
       1722.5,
       1722.5,
-      1722.5,
       1743.94,
       1743.94,
       1743.94,
@@ -911,7 +910,8 @@
       1867.31,
       1867.31,
       1867.31,
-      1867.31
+      1867.31,
+      1859.86
     ],
     "AMD": [
       629.26,
@@ -1020,57 +1020,47 @@
   },
   "signals": {
     "NVDA": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 233.95
+      "signal": "REVERSAL BAISSIER",
+      "reason": "RSI surachat RSI=100.0 correction probable",
+      "price": 238.9
     },
     "MSFT": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 517.53
+      "signal": "REVERSAL BAISSIER",
+      "reason": "RSI surachat RSI=100.0 correction probable",
+      "price": 525.18
     },
     "AAPL": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 333.69
+      "reason": "Pas de signal clair, RSI=93.8",
+      "price": 332.89
     },
     "TSLA": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 370.59
+      "signal": "REVERSAL BAISSIER",
+      "reason": "RSI surachat RSI=100.0 correction probable",
+      "price": 378.73
     },
     "AMZN": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 251.52
+      "reason": "Pas de signal clair, RSI=98.2",
+      "price": 251.4
     },
     "GOOGL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 343.5
+      "signal": "REVERSAL BAISSIER",
+      "reason": "RSI surachat RSI=100.0 correction probable",
+      "price": 346.47
     },
     "LLY": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=78.8",
-      "price": 1142.85
+      "reason": "Pas de signal clair, RSI=79.6",
+      "price": 1143.12
     },
     "ASML": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 1867.31
-    },
-    "AMD": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 633.91
-    },
-    "NOK": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=98.7",
-      "price": 10.6
+      "reason": "Pas de signal clair, RSI=95.8",
+      "price": 1859.86
     }
   },
-  "last_update": "2026-10-05T18:06:19.646198+00:00",
+  "last_update": "2026-10-06T00:39:50.555707+00:00",
   "has_news_warning": true,
   "news_event": "MI Inflation Gauge m/m"
 }
