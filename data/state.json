@@ -504,7 +504,6 @@
       229.28,
       229.28,
       229.28,
-      229.28,
       226.32,
       226.32,
       226.32,
@@ -547,7 +546,8 @@
       217.09,
       217.09,
       217.09,
-      217.09
+      217.09,
+      216.47
     ],
     "MSFT": [
       535.07,
@@ -556,7 +556,6 @@
       535.07,
       535.07,
       535.07,
-      535.07,
       541.15,
       541.15,
       541.15,
@@ -599,7 +598,8 @@
       533.52,
       533.52,
       533.52,
-      533.52
+      533.52,
+      531.87
     ],
     "AAPL": [
       336.64,
@@ -608,7 +608,6 @@
       336.64,
       336.64,
       336.64,
-      336.64,
       340.97,
       340.97,
       340.97,
@@ -651,7 +650,8 @@
       342.94,
       342.94,
       342.94,
-      342.94
+      342.94,
+      339.5
     ],
     "TSLA": [
       382.7,
@@ -660,7 +660,6 @@
       382.7,
       382.7,
       382.7,
-      382.7,
       378.03,
       378.03,
       378.03,
@@ -703,7 +702,8 @@
       368.06,
       368.06,
       368.06,
-      368.06
+      368.06,
+      373.71
     ],
     "AMZN": [
       262.43,
@@ -712,7 +712,6 @@
       262.43,
       262.43,
       262.43,
-      262.43,
       259.53,
       259.53,
       259.53,
@@ -755,7 +754,8 @@
       262.45,
       262.45,
       262.45,
-      262.45
+      262.45,
+      262.63
     ],
     "GOOGL": [
       351.66,
@@ -1020,57 +1020,32 @@
   },
   "signals": {
     "NVDA": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 217.09
+      "signal": "ATTENDRE",
+      "reason": "Pas de signal clair, RSI=89.3",
+      "price": 216.47
     },
     "MSFT": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 533.52
+      "reason": "Pas de signal clair, RSI=91.9",
+      "price": 531.87
     },
     "AAPL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=93.7",
-      "price": 342.94
+      "signal": "VENDRE",
+      "reason": "Prix sous MM10, RSI=66.3",
+      "price": 339.5
     },
     "TSLA": {
       "signal": "REVERSAL BAISSIER",
       "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 368.06
+      "price": 373.71
     },
     "AMZN": {
       "signal": "REVERSAL BAISSIER",
       "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 262.45
-    },
-    "GOOGL": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 344.18
-    },
-    "LLY": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=85.3",
-      "price": 1240.34
-    },
-    "ASML": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=100.0",
-      "price": 1647.12
-    },
-    "AMD": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 538.05
-    },
-    "NOK": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=75.0",
-      "price": 9.08
+      "price": 262.63
     }
   },
-  "last_update": "2026-10-20T19:01:29.416639+00:00",
+  "last_update": "2026-10-20T23:00:42.085720+00:00",
   "has_news_warning": true,
   "news_event": "GDP q/y"
 }
