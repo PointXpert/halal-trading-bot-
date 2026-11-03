@@ -514,7 +514,6 @@
       210.96,
       210.96,
       210.96,
-      210.96,
       216.0,
       216.0,
       216.0,
@@ -547,7 +546,8 @@
       204.64,
       202.06,
       202.06,
-      202.06
+      202.06,
+      206.69
     ],
     "MSFT": [
       524.51,
@@ -566,7 +566,6 @@
       524.51,
       524.51,
       524.51,
-      524.51,
       532.6,
       532.6,
       532.6,
@@ -599,7 +598,8 @@
       521.91,
       507.12,
       507.12,
-      507.12
+      507.12,
+      520.99
     ],
     "AAPL": [
       347.725,
@@ -618,7 +618,6 @@
       347.725,
       347.725,
       347.725,
-      347.725,
       343.91,
       343.91,
       343.91,
@@ -651,7 +650,8 @@
       344.63,
       338.32,
       338.32,
-      338.32
+      338.32,
+      331.9
     ],
     "TSLA": [
       372.22,
@@ -670,7 +670,6 @@
       372.22,
       372.22,
       372.22,
-      372.22,
       391.62,
       391.62,
       391.62,
@@ -703,7 +702,8 @@
       399.81,
       403.82,
       403.82,
-      403.82
+      403.82,
+      398.5
     ],
     "AMZN": [
       248.0,
@@ -722,7 +722,6 @@
       248.0,
       248.0,
       248.0,
-      248.0,
       249.09,
       249.09,
       249.09,
@@ -755,7 +754,8 @@
       240.35,
       245.63,
       245.63,
-      245.63
+      245.63,
+      250.69
     ],
     "GOOGL": [
       320.21,
@@ -774,7 +774,6 @@
       320.21,
       320.21,
       320.21,
-      320.21,
       316.8,
       316.8,
       316.8,
@@ -807,10 +806,10 @@
       279.84,
       278.99,
       278.99,
-      278.99
+      278.99,
+      280.03
     ],
     "LLY": [
-      1273.72,
       1273.46,
       1273.46,
       1273.46,
@@ -859,7 +858,8 @@
       1417.54,
       1410.99,
       1410.99,
-      1410.99
+      1410.99,
+      1409.27
     ],
     "ASML": [
       1571.8,
@@ -878,7 +878,6 @@
       1571.8,
       1571.8,
       1571.8,
-      1571.8,
       1590.9,
       1590.9,
       1590.9,
@@ -911,7 +910,8 @@
       1565.9,
       1526.14,
       1526.14,
-      1526.14
+      1526.14,
+      1552.14
     ],
     "AMD": [
       516.79,
@@ -930,7 +930,6 @@
       516.79,
       516.79,
       516.79,
-      516.79,
       531.28,
       531.28,
       531.28,
@@ -963,10 +962,10 @@
       504.8,
       466.84,
       466.84,
-      466.84
+      466.84,
+      483.9
     ],
     "NOK": [
-      8.125,
       8.14,
       8.14,
       8.14,
@@ -1015,62 +1014,63 @@
       8.56,
       8.3,
       8.3,
-      8.3
+      8.3,
+      8.475
     ]
   },
   "signals": {
     "NVDA": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=73.0",
-      "price": 202.06
+      "signal": "REVERSAL BAISSIER",
+      "reason": "RSI surachat RSI=81.8 correction probable",
+      "price": 206.69
     },
     "MSFT": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=43.8",
-      "price": 507.12
+      "signal": "ACHETER",
+      "reason": "Prix au-dessus MM10, RSI=59.8",
+      "price": 520.99
     },
     "AAPL": {
       "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=56.7",
-      "price": 338.32
+      "reason": "Prix sous MM10, RSI=39.4",
+      "price": 331.9
     },
     "TSLA": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 403.82
+      "signal": "VENDRE",
+      "reason": "Prix sous MM10, RSI=88.1",
+      "price": 398.5
     },
     "AMZN": {
       "signal": "REVERSAL BAISSIER",
       "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 245.63
+      "price": 250.69
     },
     "GOOGL": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=90.5",
-      "price": 278.99
+      "reason": "Pas de signal clair, RSI=91.5",
+      "price": 280.03
     },
     "LLY": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=95.7",
-      "price": 1410.99
+      "reason": "Pas de signal clair, RSI=94.6",
+      "price": 1409.27
     },
     "ASML": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=74.3",
-      "price": 1526.14
+      "signal": "ATTENDRE",
+      "reason": "Pas de signal clair, RSI=76.6",
+      "price": 1552.14
     },
     "AMD": {
       "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=65.0",
-      "price": 466.84
+      "reason": "Prix sous MM10, RSI=67.5",
+      "price": 483.9
     },
     "NOK": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=84.9",
-      "price": 8.3
+      "signal": "ATTENDRE",
+      "reason": "Pas de signal clair, RSI=84.2",
+      "price": 8.475
     }
   },
-  "last_update": "2026-11-03T15:57:47.926656+00:00",
+  "last_update": "2026-11-03T21:40:18.116649+00:00",
   "has_news_warning": true,
   "news_event": "MI Inflation Gauge m/m"
 }
