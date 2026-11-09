@@ -501,7 +501,6 @@
       217.94,
       217.94,
       217.94,
-      217.94,
       215.38,
       215.38,
       215.38,
@@ -547,10 +546,10 @@
       186.64,
       186.64,
       186.64,
+      186.64,
       186.64
     ],
     "MSFT": [
-      531.33,
       531.33,
       531.33,
       531.33,
@@ -599,10 +598,10 @@
       530.61,
       530.61,
       530.61,
+      530.61,
       530.61
     ],
     "AAPL": [
-      347.1,
       347.1,
       347.1,
       347.1,
@@ -651,10 +650,10 @@
       342.37,
       342.37,
       342.37,
+      342.37,
       342.37
     ],
     "TSLA": [
-      407.46,
       407.46,
       407.46,
       407.46,
@@ -703,10 +702,10 @@
       358.22,
       358.22,
       358.22,
+      358.22,
       358.22
     ],
     "AMZN": [
-      253.1,
       253.1,
       253.1,
       253.1,
@@ -755,10 +754,10 @@
       259.3,
       259.3,
       259.3,
+      259.3,
       259.3
     ],
     "GOOGL": [
-      320.58,
       320.58,
       320.58,
       320.58,
@@ -807,10 +806,10 @@
       284.78,
       284.78,
       284.78,
+      284.78,
       284.78
     ],
     "LLY": [
-      1281.91,
       1281.91,
       1281.91,
       1281.91,
@@ -859,10 +858,10 @@
       1354.0,
       1354.0,
       1354.0,
+      1354.0,
       1354.0
     ],
     "ASML": [
-      1635.57,
       1635.57,
       1635.57,
       1635.57,
@@ -911,10 +910,10 @@
       1424.75,
       1424.75,
       1424.75,
+      1424.75,
       1424.75
     ],
     "AMD": [
-      560.26,
       560.26,
       560.26,
       560.26,
@@ -963,10 +962,10 @@
       449.04,
       449.04,
       449.04,
+      449.04,
       449.04
     ],
     "NOK": [
-      8.89,
       8.89,
       8.89,
       8.89,
@@ -1015,62 +1014,63 @@
       7.66,
       7.66,
       7.66,
+      7.66,
       7.66
     ]
   },
   "signals": {
     "NVDA": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=38.5",
+      "reason": "Pas de signal clair, RSI=93.2",
       "price": 186.64
     },
     "MSFT": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=87.7",
+      "reason": "Pas de signal clair, RSI=90.1",
       "price": 530.61
     },
     "AAPL": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=90.3",
+      "reason": "Pas de signal clair, RSI=92.7",
       "price": 342.37
     },
     "TSLA": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=45.3",
+      "reason": "Pas de signal clair, RSI=97.7",
       "price": 358.22
     },
     "AMZN": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=95.6",
+      "reason": "Pas de signal clair, RSI=96.8",
       "price": 259.3
     },
     "GOOGL": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=76.1",
+      "reason": "Pas de signal clair, RSI=98.0",
       "price": 284.78
     },
     "LLY": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=69.7",
+      "reason": "Pas de signal clair, RSI=93.1",
       "price": 1354.0
     },
     "ASML": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=56.2",
+      "reason": "Pas de signal clair, RSI=93.0",
       "price": 1424.75
     },
     "AMD": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=57.4",
+      "reason": "Pas de signal clair, RSI=50.1",
       "price": 449.04
     },
     "NOK": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=57.7",
+      "reason": "Pas de signal clair, RSI=100.0",
       "price": 7.66
     }
   },
-  "last_update": "2026-11-09T05:19:13.389047+00:00",
+  "last_update": "2026-11-09T15:35:49.373053+00:00",
   "has_news_warning": true,
   "news_event": "CPI y/y"
 }
