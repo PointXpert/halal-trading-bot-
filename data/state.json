@@ -501,7 +501,6 @@
       215.38,
       215.38,
       215.38,
-      215.38,
       213.66,
       213.66,
       213.66,
@@ -547,10 +546,10 @@
       186.64,
       178.67,
       178.67,
-      178.67
+      178.67,
+      168.89
     ],
     "MSFT": [
-      531.01,
       531.01,
       531.01,
       531.01,
@@ -599,10 +598,10 @@
       530.61,
       545.18,
       545.18,
-      545.18
+      545.18,
+      533.16
     ],
     "AAPL": [
-      343.83,
       343.83,
       343.83,
       343.83,
@@ -651,10 +650,10 @@
       342.37,
       350.69,
       350.69,
-      350.69
+      350.69,
+      348.51
     ],
     "TSLA": [
-      404.22,
       404.22,
       404.22,
       404.22,
@@ -703,10 +702,10 @@
       358.22,
       378.05,
       378.05,
-      378.05
+      378.05,
+      379.78
     ],
     "AMZN": [
-      254.6,
       254.6,
       254.6,
       254.6,
@@ -755,10 +754,10 @@
       259.3,
       266.93,
       266.93,
-      266.93
+      266.93,
+      270.87
     ],
     "GOOGL": [
-      324.89,
       324.89,
       324.89,
       324.89,
@@ -807,10 +806,10 @@
       284.78,
       288.15,
       288.15,
-      288.15
+      288.15,
+      287.38
     ],
     "LLY": [
-      1288.3,
       1288.3,
       1288.3,
       1288.3,
@@ -859,10 +858,10 @@
       1354.0,
       1411.95,
       1411.95,
-      1411.95
+      1411.95,
+      1433.51
     ],
     "ASML": [
-      1662.85,
       1662.85,
       1662.85,
       1662.85,
@@ -911,10 +910,10 @@
       1424.75,
       1513.25,
       1513.25,
-      1513.25
+      1513.25,
+      1507.85
     ],
     "AMD": [
-      578.44,
       578.44,
       578.44,
       578.44,
@@ -963,10 +962,10 @@
       449.04,
       508.58,
       508.58,
-      508.58
+      508.58,
+      515.21
     ],
     "NOK": [
-      9.22,
       9.22,
       9.22,
       9.22,
@@ -1015,62 +1014,63 @@
       7.66,
       8.18,
       8.18,
-      8.18
+      8.18,
+      8.245
     ]
   },
   "signals": {
     "NVDA": {
       "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=54.8",
-      "price": 178.67
+      "reason": "Prix sous MM10, RSI=35.3",
+      "price": 168.89
     },
     "MSFT": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=92.2 correction probable",
-      "price": 545.18
+      "signal": "ATTENDRE",
+      "reason": "Pas de signal clair, RSI=84.0",
+      "price": 533.16
     },
     "AAPL": {
       "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=94.5 correction probable",
-      "price": 350.69
+      "reason": "RSI surachat RSI=93.4 correction probable",
+      "price": 348.51
     },
     "TSLA": {
       "signal": "REVERSAL BAISSIER",
       "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 378.05
+      "price": 379.78
     },
     "AMZN": {
       "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=97.5 correction probable",
-      "price": 266.93
+      "reason": "RSI surachat RSI=97.6 correction probable",
+      "price": 270.87
     },
     "GOOGL": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 288.15
+      "signal": "ATTENDRE",
+      "reason": "Pas de signal clair, RSI=95.3",
+      "price": 287.38
     },
     "LLY": {
       "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=95.0 correction probable",
-      "price": 1411.95
+      "reason": "RSI surachat RSI=95.3 correction probable",
+      "price": 1433.51
     },
     "ASML": {
       "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 1513.25
+      "reason": "RSI surachat RSI=97.3 correction probable",
+      "price": 1507.85
     },
     "AMD": {
       "signal": "REVERSAL BAISSIER",
       "reason": "RSI surachat RSI=100.0 correction probable",
-      "price": 508.58
+      "price": 515.21
     },
     "NOK": {
       "signal": "REVERSAL BAISSIER",
       "reason": "RSI surachat RSI=99.9 correction probable",
-      "price": 8.18
+      "price": 8.245
     }
   },
-  "last_update": "2026-11-10T16:51:37.486639+00:00",
+  "last_update": "2026-11-10T22:11:46.493878+00:00",
   "has_news_warning": true,
   "news_event": "CPI y/y"
 }
