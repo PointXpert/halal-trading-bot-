@@ -1018,59 +1018,8 @@
       7.69
     ]
   },
-  "signals": {
-    "NVDA": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=47.9",
-      "price": 155.46
-    },
-    "MSFT": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=74.7",
-      "price": 506.24
-    },
-    "AAPL": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=88.8",
-      "price": 351.91
-    },
-    "TSLA": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=75.3",
-      "price": 380.11
-    },
-    "AMZN": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=74.5",
-      "price": 257.89
-    },
-    "GOOGL": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=58.2",
-      "price": 280.2
-    },
-    "LLY": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=79.6",
-      "price": 1415.43
-    },
-    "ASML": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=61.6",
-      "price": 1383.11
-    },
-    "AMD": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=69.5",
-      "price": 503.41
-    },
-    "NOK": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=63.1",
-      "price": 7.69
-    }
-  },
-  "last_update": "2026-11-17T21:33:22.423318+00:00",
+  "signals": {},
+  "last_update": "2026-11-18T03:23:44.861164+00:00",
   "has_news_warning": true,
   "news_event": "Prelim GDP Price Index y/y"
 }
