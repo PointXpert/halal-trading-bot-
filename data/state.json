@@ -499,7 +499,6 @@
     ],
     "NVDA": [
       181.6,
-      181.6,
       186.64,
       186.64,
       186.64,
@@ -547,7 +546,8 @@
       150.96,
       145.98,
       145.98,
-      145.98
+      145.98,
+      125.53
     ],
     "MSFT": [
       535.93,
@@ -1020,57 +1020,12 @@
   },
   "signals": {
     "NVDA": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=36.9",
-      "price": 145.98
-    },
-    "MSFT": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=41.2",
-      "price": 498.3
-    },
-    "AAPL": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=69.6",
-      "price": 349.21
-    },
-    "TSLA": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=74.5",
-      "price": 374.41
-    },
-    "AMZN": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=54.2",
-      "price": 257.37
-    },
-    "GOOGL": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=43.0",
-      "price": 272.66
-    },
-    "LLY": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=52.2",
-      "price": 1351.12
-    },
-    "ASML": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=56.4",
-      "price": 1356.2
-    },
-    "AMD": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=74.4",
-      "price": 489.19
-    },
-    "NOK": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=63.6",
-      "price": 7.5
+      "signal": "REVERSAL HAUSSIER",
+      "reason": "RSI survente RSI=20.9 retournement probable",
+      "price": 125.53
     }
   },
-  "last_update": "2026-11-20T19:45:29.340898+00:00",
+  "last_update": "2026-11-21T01:09:59.152924+00:00",
   "has_news_warning": true,
   "news_event": "Prelim GDP Price Index y/y"
 }
