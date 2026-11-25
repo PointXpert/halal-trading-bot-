@@ -499,7 +499,6 @@
     ],
     "NVDA": [
       186.64,
-      186.64,
       178.67,
       178.67,
       178.67,
@@ -547,10 +546,10 @@
       125.53,
       125.53,
       165.05,
-      165.05
+      165.05,
+      155.38
     ],
     "MSFT": [
-      530.61,
       530.61,
       530.61,
       545.18,
@@ -599,10 +598,10 @@
       484.52,
       484.52,
       492.5,
-      492.5
+      492.5,
+      496.13
     ],
     "AAPL": [
-      342.37,
       342.37,
       342.37,
       350.69,
@@ -651,10 +650,10 @@
       342.56,
       342.56,
       349.08,
-      349.08
+      349.08,
+      354.07
     ],
     "TSLA": [
-      358.22,
       358.22,
       358.22,
       378.05,
@@ -703,10 +702,10 @@
       345.82,
       345.82,
       385.46,
-      385.46
+      385.46,
+      384.68
     ],
     "AMZN": [
-      259.3,
       259.3,
       259.3,
       266.93,
@@ -755,10 +754,10 @@
       246.82,
       246.82,
       255.39,
-      255.39
+      255.39,
+      252.29
     ],
     "GOOGL": [
-      284.78,
       284.78,
       284.78,
       288.15,
@@ -807,10 +806,10 @@
       265.29,
       265.29,
       282.1,
-      282.1
+      282.1,
+      279.05
     ],
     "LLY": [
-      1354.0,
       1354.0,
       1354.0,
       1354.0,
@@ -859,10 +858,10 @@
       1347.11,
       1347.11,
       1364.6,
-      1364.6
+      1364.6,
+      1407.59
     ],
     "ASML": [
-      1424.75,
       1424.75,
       1424.75,
       1424.75,
@@ -911,10 +910,10 @@
       1266.22,
       1266.22,
       1383.78,
-      1383.78
+      1383.78,
+      1336.06
     ],
     "AMD": [
-      449.04,
       449.04,
       449.04,
       449.04,
@@ -963,10 +962,10 @@
       424.39,
       424.39,
       453.46,
-      453.46
+      453.46,
+      413.27
     ],
     "NOK": [
-      7.66,
       7.66,
       7.66,
       7.66,
@@ -1015,62 +1014,63 @@
       6.88,
       6.88,
       7.55,
-      7.55
+      7.55,
+      7.33
     ]
   },
   "signals": {
     "NVDA": {
       "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=63.6",
-      "price": 165.05
+      "reason": "Prix au-dessus MM10, RSI=59.6",
+      "price": 155.38
     },
     "MSFT": {
       "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=53.5",
-      "price": 492.5
+      "reason": "Prix au-dessus MM10, RSI=56.6",
+      "price": 496.13
     },
     "AAPL": {
       "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=70.7 correction probable",
-      "price": 349.08
+      "reason": "RSI surachat RSI=74.5 correction probable",
+      "price": 354.07
     },
     "TSLA": {
       "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=68.6",
-      "price": 385.46
+      "reason": "Prix au-dessus MM10, RSI=68.2",
+      "price": 384.68
     },
     "AMZN": {
       "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=60.0",
-      "price": 255.39
+      "reason": "Prix au-dessus MM10, RSI=56.7",
+      "price": 252.29
     },
     "GOOGL": {
       "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=66.3",
-      "price": 282.1
+      "reason": "Prix au-dessus MM10, RSI=62.6",
+      "price": 279.05
     },
     "LLY": {
       "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=76.9 correction probable",
-      "price": 1364.6
+      "reason": "RSI surachat RSI=81.9 correction probable",
+      "price": 1407.59
     },
     "ASML": {
       "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=65.5",
-      "price": 1383.78
+      "reason": "Prix au-dessus MM10, RSI=58.1",
+      "price": 1336.06
     },
     "AMD": {
-      "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=64.5",
-      "price": 453.46
+      "signal": "VENDRE",
+      "reason": "Prix sous MM10, RSI=56.8",
+      "price": 413.27
     },
     "NOK": {
       "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=67.4",
-      "price": 7.55
+      "reason": "Prix au-dessus MM10, RSI=61.2",
+      "price": 7.33
     }
   },
-  "last_update": "2026-11-24T17:11:11.570083+00:00",
+  "last_update": "2026-11-25T01:59:54.927010+00:00",
   "has_news_warning": true,
   "news_event": "FOMC Member Williams Speaks"
 }
