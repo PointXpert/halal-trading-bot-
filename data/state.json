@@ -498,7 +498,6 @@
       64306.0
     ],
     "NVDA": [
-      178.67,
       168.89,
       168.89,
       168.89,
@@ -547,10 +546,10 @@
       155.38,
       155.38,
       149.3,
+      149.3,
       149.3
     ],
     "MSFT": [
-      545.18,
       545.18,
       533.16,
       533.16,
@@ -599,10 +598,10 @@
       496.13,
       496.13,
       489.93,
+      489.93,
       489.93
     ],
     "AAPL": [
-      350.69,
       350.69,
       348.51,
       348.51,
@@ -651,10 +650,10 @@
       354.07,
       354.07,
       355.58,
+      355.58,
       355.58
     ],
     "TSLA": [
-      378.05,
       378.05,
       379.78,
       379.78,
@@ -703,10 +702,10 @@
       384.68,
       384.68,
       380.14,
+      380.14,
       380.14
     ],
     "AMZN": [
-      266.93,
       266.93,
       270.87,
       270.87,
@@ -755,10 +754,10 @@
       252.29,
       252.29,
       244.43,
+      244.43,
       244.43
     ],
     "GOOGL": [
-      288.15,
       288.15,
       287.38,
       287.38,
@@ -807,10 +806,10 @@
       279.05,
       279.05,
       273.1,
+      273.1,
       273.1
     ],
     "LLY": [
-      1411.95,
       1411.95,
       1411.95,
       1433.51,
@@ -859,10 +858,10 @@
       1407.59,
       1407.59,
       1392.27,
+      1392.22,
       1392.22
     ],
     "ASML": [
-      1513.25,
       1513.25,
       1513.25,
       1507.85,
@@ -911,10 +910,10 @@
       1336.06,
       1336.06,
       1303.08,
+      1303.08,
       1303.08
     ],
     "AMD": [
-      508.58,
       508.58,
       508.58,
       515.21,
@@ -963,10 +962,10 @@
       413.27,
       413.27,
       406.03,
+      406.03,
       406.03
     ],
     "NOK": [
-      8.18,
       8.18,
       8.18,
       8.245,
@@ -1015,6 +1014,7 @@
       7.33,
       7.33,
       7.295,
+      7.3,
       7.3
     ]
   },
@@ -1035,42 +1035,42 @@
       "price": 355.58
     },
     "TSLA": {
-      "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=65.0",
+      "signal": "REVERSAL BAISSIER",
+      "reason": "RSI surachat RSI=92.2 correction probable",
       "price": 380.14
     },
     "AMZN": {
       "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=52.5",
+      "reason": "Prix sous MM10, RSI=68.4",
       "price": 244.43
     },
     "GOOGL": {
       "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=65.0",
+      "reason": "Pas de signal clair, RSI=77.1",
       "price": 273.1
     },
     "LLY": {
       "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=89.3 correction probable",
+      "reason": "RSI surachat RSI=84.2 correction probable",
       "price": 1392.22
     },
     "ASML": {
       "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=58.9",
+      "reason": "Prix sous MM10, RSI=65.9",
       "price": 1303.08
     },
     "AMD": {
       "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=63.1",
+      "reason": "Prix sous MM10, RSI=73.6",
       "price": 406.03
     },
     "NOK": {
       "signal": "ACHETER",
-      "reason": "Prix au-dessus MM10, RSI=62.7",
+      "reason": "Prix au-dessus MM10, RSI=52.1",
       "price": 7.3
     }
   },
-  "last_update": "2026-11-26T04:00:08.268982+00:00",
+  "last_update": "2026-11-26T13:46:35.282237+00:00",
   "has_news_warning": true,
   "news_event": "FOMC Member Williams Speaks"
 }
