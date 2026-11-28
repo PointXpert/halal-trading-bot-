@@ -500,7 +500,6 @@
     "NVDA": [
       173.73,
       173.73,
-      173.73,
       166.19,
       166.19,
       166.19,
@@ -547,10 +546,10 @@
       149.3,
       149.3,
       149.3,
+      150.49,
       150.49
     ],
     "MSFT": [
-      533.16,
       521.125,
       521.125,
       521.125,
@@ -599,10 +598,10 @@
       489.93,
       489.93,
       489.93,
+      492.85,
       492.85
     ],
     "AAPL": [
-      348.51,
       355.63,
       355.63,
       355.63,
@@ -651,10 +650,10 @@
       355.58,
       355.58,
       355.58,
+      358.54,
       358.54
     ],
     "TSLA": [
-      379.78,
       390.84,
       390.84,
       390.84,
@@ -703,10 +702,10 @@
       380.14,
       380.14,
       380.14,
+      400.0,
       400.0
     ],
     "AMZN": [
-      270.87,
       266.17,
       266.17,
       266.17,
@@ -755,6 +754,7 @@
       244.43,
       244.43,
       244.43,
+      254.12,
       254.12
     ],
     "GOOGL": [
@@ -1020,8 +1020,8 @@
   },
   "signals": {
     "NVDA": {
-      "signal": "VENDRE",
-      "reason": "Prix sous MM10, RSI=74.3",
+      "signal": "ATTENDRE",
+      "reason": "Pas de signal clair, RSI=72.1",
       "price": 150.49
     },
     "MSFT": {
@@ -1043,34 +1043,9 @@
       "signal": "REVERSAL BAISSIER",
       "reason": "RSI surachat RSI=72.9 correction probable",
       "price": 254.12
-    },
-    "GOOGL": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=78.2",
-      "price": 274.96
-    },
-    "LLY": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=84.6",
-      "price": 1394.74
-    },
-    "ASML": {
-      "signal": "ATTENDRE",
-      "reason": "Pas de signal clair, RSI=68.9",
-      "price": 1325.82
-    },
-    "AMD": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=75.3 correction probable",
-      "price": 424.54
-    },
-    "NOK": {
-      "signal": "REVERSAL BAISSIER",
-      "reason": "RSI surachat RSI=82.0 correction probable",
-      "price": 7.58
     }
   },
-  "last_update": "2026-11-27T23:16:59.470595+00:00",
+  "last_update": "2026-11-28T06:55:25.993535+00:00",
   "has_news_warning": true,
   "news_event": "FOMC Member Williams Speaks"
 }
